@@ -1,2 +1,2 @@
 # applicationWeb
-Répertoire pour le cours de projet - Développement d'une application web.
+Répertoire pour le cours Projet - Développement d'une application web.
