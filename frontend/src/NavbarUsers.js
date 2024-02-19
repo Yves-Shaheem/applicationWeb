@@ -1,4 +1,4 @@
-// NavBar
+// NavBarUsers
 
 import { Link } from "react-router-dom"
 
@@ -22,18 +22,10 @@ const NavBar = () => {
                     <li> 
                         <Link to="/Contact">Contact</Link>
                     </li>
-
                     <li> 
-                        <Link to="/Inscription">Inscription</Link>
+                        <Link to="/Contact">Rendez-vous</Link>
                     </li>
-                    <li> 
-                        <Link to="/SeConnecter">Se Connecter</Link>
-                    </li>
-                    <li> 
-                        <Link to="/RendezVous">Rendez-vous</Link>
-                    </li>
-
-
+                    <button type="button" className="btn btn-danger">Deconnexion</button>
                 </ul>
             </div>
         </nav>
