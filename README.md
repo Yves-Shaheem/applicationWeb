@@ -9,8 +9,10 @@ Répertoire pour le cours Projet - Développement d'une application web.
 
 4- Enjoy and code !! 
 
-API - https://expressjs.com
+API :
 
-    - https://www.npmjs.com 
+- https://expressjs.com
 
-    - https://fr.legacy.reactjs.org/docs/getting-started.html 
+- https://www.npmjs.com 
+
+- https://fr.legacy.reactjs.org/docs/getting-started.html 
