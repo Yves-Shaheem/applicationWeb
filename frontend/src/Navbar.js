@@ -22,9 +22,18 @@ const NavBar = () => {
                     <li> 
                         <Link to="/Contact">Contact</Link>
                     </li>
+
                     <li> 
-                        <Link to="https://github.com/Yves-Shaheem/applicationWeb.git">Test</Link>
+                        <Link to="/Inscription">Inscription</Link>
                     </li>
+                    <li> 
+                        <Link to="/SeConnecter">Se Connecter</Link>
+                    </li>
+                    <li> 
+                        <Link to="/RendezVous">Rendez-vous</Link>
+                    </li>
+
+
                 </ul>
             </div>
         </nav>
