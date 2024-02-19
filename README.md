@@ -8,3 +8,9 @@ Répertoire pour le cours Projet - Développement d'une application web.
 3- Dans Vs code, faire npm install dans le terminal.
 
 4- Enjoy and code !! 
+
+API - https://expressjs.com
+
+    - https://www.npmjs.com 
+
+    - https://fr.legacy.reactjs.org/docs/getting-started.html 
