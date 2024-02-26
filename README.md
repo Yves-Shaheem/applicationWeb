@@ -9,6 +9,8 @@ Répertoire pour le cours Projet - Développement d'une application web.
 
 4- Enjoy and code !! 
 
+5- To start nodemon do: npm run dev
+
 API :
 
 - https://expressjs.com
