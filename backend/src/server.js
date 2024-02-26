@@ -29,7 +29,7 @@ app.get('/patient',
             if(conn){
                 console.log("Connected to DB");
             }
-            const toto = "Select * from patient";
+            const toto = "Select * from patient where status=true";
             const rs = await conn.query(toto);
             console.log(rs);
             return response.json(rs);
@@ -50,13 +50,14 @@ app.post('/CreatePatient',
         const fn = request.query.firstname;
         const ln = request.query.lastname;
         const rq = request.query.ramq;
-        const values = [fn, ln, rq];
+        const st = true;
+        const values = [fn, ln, rq,st];
         try {
             conn = await db.getConnection();
             if(conn){
                 console.log("Connected to DB");
             }
-            const toto = "Insert into patient(firstname, lastname, ramq) values(?,?,?)";
+            const toto = "Insert into patient(firstname, lastname, ramq,status) values(?,?,?,?)";
             const rs = await conn.prepare(toto);
             await rs.execute(values);
             console.log(rs);
@@ -71,7 +72,7 @@ app.post('/CreatePatient',
             // Ultra important pour éviter les injections SQL
         }
     });
-app.get('/UpdatePatient',
+app.put('/UpdatePatient',
     async (request, response) => {
         let conn;
         const index = request.query.id;
@@ -83,11 +84,40 @@ app.get('/UpdatePatient',
             if(conn){
                 console.log("Connected to DB");
             }
-            const patient = "Select * from patient where id=?";
+            const patient = "Update patient Set firstname= ? where patient_id= ?";
             const rs = await conn.prepare(patient);
             await rs.execute(values);
             console.log(rs);
+            response.send("OK");
+            //return response.json(rs);
+        }
+        catch (error) {
+            console.log(error);
+        } finally {
+            if (conn) {
+                conn.end;
+            }
+            // Ultra important pour éviter les injections SQL
+        }
+    });
+app.put('/DeletePatient',
+    async (request, response) => {
+        let conn;
+        const index = request.query.id;
+        const st =false;
 
+        const values = [st,index];
+        try {
+            conn = await db.getConnection();
+            if(conn){
+                console.log("Connected to DB");
+            }
+            const patient = "Update patient Set status= ? where patient_id= ?";
+            const rs = await conn.prepare(patient);
+            await rs.execute(values);
+            console.log(rs);
+            response.send("OK");
+            //return response.json(rs);
         }
         catch (error) {
             console.log(error);
