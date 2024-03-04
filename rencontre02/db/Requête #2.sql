@@ -9,6 +9,7 @@ patient_id INT NOT NULL AUTO_INCREMENT,
 firstname VARCHAR(35) NOT NULL,
 lastname VARCHAR(35) NOT NULL,
 ramq VARCHAR(12) NOT NULL,
+email VARCHAR(50) not null unique,
 status boolean,
 PRIMARY KEY(patient_id)
 );
@@ -20,6 +21,7 @@ firstname VARCHAR(35) NOT NULL,
 lastname VARCHAR(35) NOT NULL,
 specialité VARCHAR(12) NOT NULL,
 licence VARCHAR(12) NOT NULL,
+email  VARCHAR(50) not null unique,
 status boolean,
 PRIMARY KEY(docteur_id)
 );
@@ -43,5 +45,16 @@ FOREIGN KEY(user_id) REFERENCES docteur( docteur_id),
 FOREIGN KEY(user_id) REFERENCES administrator(admin_id)
 );
 
+DROP TABLE if EXISTS reservation;
+CREATE TABLE reservation(
+reservation_id int not null auto_increment,
+patientEmail VARCHAR(50) NOT NULL,
+doctorEmail VARCHAR(50) not null,
+temps VARCHAR(50) not null,
+raison varchar(250) not null,
+PRIMARY KEY(reservation_id),
+foreign key(doctorEmail) references docteur(email),
+foreign key(patientEmail) references patient(email)
+);
 
 

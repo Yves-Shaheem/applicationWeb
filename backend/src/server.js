@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const port = 9000;
+const port = 5000;
 
 const db = mariadb.createPool({
     host: "127.0.0.1",
@@ -43,6 +43,28 @@ app.get('/patient',
             // Ultra important pour éviter les injections SQL
         }
     });
+app.get('/reservation',
+    async (request, response) => {
+        let conn;
+        try {
+            conn = await db.getConnection();
+            if(conn){
+                console.log("Connected to DB");
+            }
+            const toto = "Select * from reservation";
+            const rs = await conn.query(toto);
+            console.log(rs);
+            return response.json(rs);
+        }
+        catch (error) {
+            console.log(error);
+        } finally {
+            if (conn) {
+                conn.end;
+            }
+            // Ultra important pour éviter les injections SQL
+        }
+    });
 
 app.post('/CreatePatient',
     async (request, response) => {
@@ -50,15 +72,16 @@ app.post('/CreatePatient',
         const fn = request.query.firstname;
         const ln = request.query.lastname;
         const rq = request.query.ramq;
+        const el = request.query.email;
         const st = true;
-        const values = [fn, ln, rq,st];
+        const values = [fn, ln, rq,el,st];
         try {
             conn = await db.getConnection();
             if(conn){
                 console.log("Connected to DB");
             }
-            const toto = "Insert into patient(firstname, lastname, ramq,status) values(?,?,?,?)";
-            const rs = await conn.prepare(toto);
+            const query = "Insert into patient(firstname, lastname, ramq,email,status) values(?,?,?,?,?)";
+            const rs = await conn.prepare(query);
             await rs.execute(values);
             console.log(rs);
             return response.json(rs);
