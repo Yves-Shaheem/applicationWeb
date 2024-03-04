@@ -5,7 +5,7 @@ import React, {useEffect} from "react";
 
 function Home() {
 
-    const baseURL = "http://localhost:5000/patient";
+    const baseURL = "http://localhost:5000/reservation";
     const [reservation, setReservation] = React.useState([]);
 
     useEffect(() => {
@@ -24,15 +24,15 @@ function Home() {
                     <tr>
                     <th>id</th>
 
-                    <th>firstname</th>
+                    <th>Date de la réservation</th>
                     </tr>
                     </thead>
                     <tbody>
                     {
                         reservation.map((resv,i) => (
                             <tr>
-                                <td>{resv.patient_id}</td>
-                                <td>{resv.firstname}</td>
+                                <td>{resv.reservation_id}</td>
+                                <td>{resv.temps}</td>
                             </tr>
                         ))
                     }

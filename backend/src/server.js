@@ -43,6 +43,7 @@ app.get('/patient',
             // Ultra important pour éviter les injections SQL
         }
     });
+
 app.get('/reservation',
     async (request, response) => {
         let conn;
@@ -75,6 +76,35 @@ app.post('/CreatePatient',
         const el = request.query.email;
         const st = true;
         const values = [fn, ln, rq,el,st];
+        try {
+            conn = await db.getConnection();
+            if(conn){
+                console.log("Connected to DB");
+            }
+            const query = "Insert into patient(firstname, lastname, ramq,email,status) values(?,?,?,?,?)";
+            const rs = await conn.prepare(query);
+            await rs.execute(values);
+            console.log(rs);
+            return response.json(rs);
+        }
+        catch (error) {
+            console.log(error);
+        } finally {
+            if (conn) {
+                conn.end;
+            }
+            // Ultra important pour éviter les injections SQL
+        }
+    });
+app.post('/CreateReservation',
+    async (request, response) => {
+        let conn;
+        const pe = request.query.patientEmail;
+        const de = request.query.doctorEmail;
+        const te = request.query.temps;
+        const rn = request.query.raison;
+        const st = true;
+        const values = [pe,de,te,rn,st];
         try {
             conn = await db.getConnection();
             if(conn){
