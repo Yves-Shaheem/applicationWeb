@@ -33,6 +33,11 @@ const NavBar = () => {
                         <Link to="/RendezVous">Rendez-vous</Link>
                     </li>
 
+                    <li> 
+                        <Link to="/HomePatient">HomePatient</Link>
+                    </li>
+
+
 
                 </ul>
             </div>
