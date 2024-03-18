@@ -1,18 +1,13 @@
 import express from "express";
 import mariadb from "mariadb";
 import cors from "cors";
+import database from "./properties.js";
 
 const app = express();
 const router =express.Router();
 app.use(cors());
 
-const db = mariadb.createPool({
-    host: "127.0.0.1",
-    port: "3306",
-    user: "root",
-    password: "",
-    database: "projet"
-});
+const db = database;
 
 
 router.get('/docteur',

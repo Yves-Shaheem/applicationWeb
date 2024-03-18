@@ -3,7 +3,7 @@ function RendezVous(){
         <div className="hero">
             <div className="col-12">
                 <h1>Prendre rendez-vous</h1>
-                <form  method="get">
+                <form  method="post">
                 <div>
             Prénom: <br />
             <input type="text" name="firstname" />

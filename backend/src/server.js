@@ -12,14 +12,6 @@ app.use(cors());
 
 const port = 5000;
 
-const db = mariadb.createPool({
-    host: "127.0.0.1",
-    port: "3306",
-    user: "root",
-    password: "",
-    database: "projet"
-});
-
 app.use(patientRoute);
 app.use(docteurRoute);
 app.use(reservationRoute);
