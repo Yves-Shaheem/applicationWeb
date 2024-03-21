@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import React, {useEffect} from "react";
+import React from "react";
 import axios from "axios";
 
 
@@ -8,44 +8,18 @@ function Inscription(){
     * @author Shaheem
     *  */
     const baseURL = "http://localhost:5000/CreatePatient";
-    // useEffect(() => {
-    //     const postData = () => {
-    //         axios
-    //             .post(baseURL, {
-    //                 firstname:patient.fn,
-    //                 lastname: patient.ln,
-    //                 ramq:patient.rq,
-    //                 email:patient.el
-    //             })
-    //             .then(res => console.log(res))
-    //             .catch(err => console.log(err));
-    //     };
-    //     if(formErrors.length == 0){
-    //         postData();
-    //     }
-    //     axios
-    //         .post(baseURL, {
-    //             firstname:patient.fn,
-    //             lastname: patient.ln,
-    //             ramq:patient.rq,
-    //             email:patient.el
-    //         })
-    //         .then(res => console.log(res))
-    //         .catch(err => console.log(err));
-    //
-    //
-    // }, [])
+
     const patientValues = {
-        fn: "",
-        ln: "",
-        rq:"",
-        el:"",
-        pwd:""
+        firstname: "",
+        lastname: "",
+        ramq:"",
+        email:"",
+        password:""
     }
 
 
     const [patient, setPatient] = React.useState(patientValues);
-    const[formErrors, setFormErrors] = React.useState({});
+    const[formErrors, setFormErrors] = React.useState([]);
     function handleChange(event) {
         setPatient(
             {
@@ -54,7 +28,7 @@ function Inscription(){
             }
     )}
     function isValidE(email) {
-        let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        let regex = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
         let flag = regex.test(email)
         return flag;
 
@@ -67,30 +41,40 @@ function Inscription(){
     };
     function DataValidation(inputValues) {
         const errors ={};
-        if(!inputValues.ln || !inputValues.fn
-            || !inputValues.el || !inputValues.rq || !inputValues.pwd){
+        if(!inputValues.lastname || !inputValues.firstname
+            || !inputValues.email || !inputValues.ramq || !inputValues.password){
             errors.value = "Aucun champ ne doit etre vide ! ";
         }
-        if(!isValidR(inputValues.rq)){
+        if(!isValidR(inputValues.ramq)){
             errors.ramq = "Veuillez rentrer l'information comme telle 'XXXX00000000' ";
         }
-        if(!isValidE(inputValues.el)){
+        if(!isValidE(inputValues.email)){
             errors.email = "Veuillez entrez un email valide";
         }
         return errors;
     }
     function handleSubmit(event){
         event.preventDefault();
-        setFormErrors(DataValidation(patient))
+
+        setFormErrors([...formErrors, DataValidation(patient) ])
         console.log(patient);
-        axios.post(baseURL, {
-                firstname:patient.fn,
-                lastname: patient.ln,
-                ramq:patient.rq,
-                email:patient.el
-            })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
+        const userData = {
+            firstname:patient.firstname,
+            lastname: patient.lastname,
+            ramq:patient.ramq,
+            email:patient.email
+        }
+        console.log(userData);
+        console.log(formErrors);
+        if(formErrors.size == 0){
+            axios.post(baseURL, userData,{
+                headers: {
+                    'Content-Type': 'application/json'
+                }})
+                .then((res) =>{ console.log(res.status, res.data)})
+                .catch(err => console.log(err));
+        }
+
     }
     /*
     * author Shaheem Yanni*/
@@ -101,26 +85,26 @@ function Inscription(){
             <form  onSubmit={handleSubmit}>
                 <div>
                     Prénom: <span style={{color:"red"}}>*</span><br />
-                    <input onChange={handleChange} type="text" name="fn" />
+                    <input onChange={handleChange} type="text" name="firstname" />
                 </div>
           
                 <div>
                     Nom: <span style={{color:"red"}}>*</span><br/>
-                    <input onChange={handleChange} type="text" name="ln" />
+                    <input onChange={handleChange} type="text" name="lastname" />
                 </div>
 
                 <div>
                     RAMQ: <span style={{color:"red"}}>*</span><br/>
-                    <input onChange={handleChange} type="text" name="rq" maxLength={12} />
+                    <input onChange={handleChange} type="text" name="ramq" maxLength={12} />
                 </div>
                 <div>
                     Email: <span style={{color: "red"}}>*</span> <br/>
-                    <input onChange={handleChange} type="text" name="el" />
+                    <input onChange={handleChange} type="text" name="email" />
                 </div>
 
                 <div>
                     Password: <span style={{color:"red"}}>*</span><br/>
-                    <input onChange={handleChange} type="password" name="pwd" />
+                    <input onChange={handleChange} type="password" name="password" />
                 </div>
                 <br></br>
                 <input type="checkbox" name="TermsOfUse" value="" /> &nbsp;

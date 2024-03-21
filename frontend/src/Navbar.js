@@ -8,6 +8,7 @@ const NavBar = () => {
 
         <nav className="nav">
             <div className="container">
+                <Link to="/Admin">AdminPanel</Link>
                 <h1 className="logo"><Link to="/">MedHub</Link></h1>
                 <ul>
                     <li> 

@@ -42,12 +42,12 @@ router.get('/patient',
 
 
 router.post('/CreatePatient',
-    async (request, response) => {
+    async (req, response) => {
         let conn;
-        const fn = request.query.firstname;
-        const ln = request.query.lastname;
-        const rq = request.query.ramq;
-        const el = request.query.email;
+        const fn = req.body.firstname;
+        const ln = req.body.lastname;
+        const rq = req.body.ramq;
+        const el = req.body.email;
         const st = true;
         const values = [fn, ln, rq,el,st];
         try {

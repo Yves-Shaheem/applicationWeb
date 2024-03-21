@@ -12,6 +12,7 @@ import SeConnecter from './Composants/SeConnecter';
 import RendezVous from './Composants/RendezVous';
 import TermsOfUse from './Composants/TermsOfUse';
 import HomePatient from "./Composants/HomePatient";
+import AdminPanel from "./Composants/AdminPanel";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
           <Route path="/RendezVous" element={<RendezVous/>} />
           <Route path="/TermsOfUse" element={<TermsOfUse/>} />
           <Route path='/HomePatient' element={<HomePatient/>} />
-
+          <Route path='/Admin' element={<AdminPanel/>} />
         </Routes>
       </div>
     </BrowserRouter>

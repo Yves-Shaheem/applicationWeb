@@ -8,7 +8,7 @@ CREATE TABLE PATIENT(
 patient_id INT NOT NULL AUTO_INCREMENT,
 firstname VARCHAR(35) NOT NULL,
 lastname VARCHAR(35) NOT NULL,
-ramq VARCHAR(12) NOT NULL unique,
+ramq VARCHAR(255) NOT NULL unique,
 email VARCHAR(50) not null unique,
 status boolean,
 PRIMARY KEY(patient_id)
@@ -63,7 +63,7 @@ foreign key(ramq) references patient(ramq)
 DROP TABLE if EXISTS resultat;
 CREATE TABLE resultat(
 resultat_id INT NOT NULL auto_increment,
-ramq VARCHAR(12) not null,
+ramq VARCHAR(13) not null,
 patientEmail VARCHAR(50) NOT NULL,
 doctorEmail VARCHAR(50) not null,
 message VARCHAR(250) NOT null,
