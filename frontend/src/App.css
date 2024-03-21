@@ -54,7 +54,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom center;
-  height: 100vh;
+  height: 92vh;
   color: black;
   display: flex;
   align-items: center;
@@ -62,3 +62,9 @@
   margin-bottom: 20px;
   z-index: -2;
 }
+
+
+.entete {
+  margin-bottom: 200px;
+}
+
