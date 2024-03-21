@@ -1,52 +1,70 @@
-import React from "react";
-import { useState } from "react";
-import Taches from "./Taches1";
-
-
+import axios from "axios";
+import React, {useEffect} from "react";
+ 
+ 
+ 
 function HomePatient (){
-    const [listItems, setListe] =React.useState([])
-    const[unItem,setItem]=useState("")
-
-    const handleButton=()=>{
-        setListe([unItem,...listItems])
-    }
-    const handleText=(ev) =>{
-        setItem(ev.target.value)
-    }
-
-    const supprimer=(index)=>{
-        const newList=[...listItems]
-        newList.splice(index,1)
-        setListe(newList)
-    }
-
-
+ 
+    const baseURL = "http://localhost:5000/reservation";
+    const baseURL2="http://localhost:5000/UpdateReservation";
+    const [reservation, setReservation] = React.useState([]);
+ 
+   
+   
+ 
+    useEffect(() => {
+ 
+        axios.get(baseURL)
+            .then(res => setReservation(res.data))
+            .catch(err => console.log(err));
+ 
+         
+        axios.put(baseURL2)
+            .then(res2=>setReservation(res2.data))
+            .catch(err=>console.log(err));
+ 
+}, [])
+ 
+ 
     return (
-        <div >
-            <br></br>  <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
-
-            <h1>Liste des taches</h1>
-            <input onChange={handleText} type="text" />
-            <button onClick={handleButton}>Ajouter</button>
-
-            <table className="table table-striped">
-                <tbody>
-                {
-                    listItems.map((e,index)=>
-                        <tr>
-                            <td>
-                                <Taches texte={e} supprimer={supprimer}/>                                
-                            </td>
-                        </tr>
-                    )
-
-                }
-                </tbody>
-            </table>
-
+        <div className="hero">
+            <div className="container">
+                <h1>Page HomePatient</h1>
+                <table className="table table-striped">
+                    <thead>
+                    <h3>Liste des reservations</h3>
+                    <tr>
+                    <th>Id</th>
+                    <th>PatientEmail</th>
+                    <th>RAMQ</th>
+                    <th>DoctorEmail</th>
+                    <th>temps</th>
+                    <th>raison</th>
+ 
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        reservation.map((resv,i) => (
+                            <tr>
+ 
+                                <td>{resv.reservation_id}</td>
+                                <td>{resv.patientEmail}</td>
+                                <td>{resv.ramq}</td>
+                                <td>{resv.doctorEmail}</td>
+                                <td>{resv.temps}</td>
+                                <td>{resv.raison}</td>
+                                <button /*onClick={}*/ className="btn btn-danger">Annuler</button>
+ 
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </table>
+ 
+            </div>
+ 
         </div>
-    )
-
-}
-
-export default HomePatient;
+    );
+    }
+    export default HomePatient;
