@@ -15,7 +15,7 @@ const db = mariadb.createPool({
 });
 
 
-app.get('/reservation',
+router.get('/reservation',
     async (request, response) => {
         let conn;
         try {
@@ -38,7 +38,7 @@ app.get('/reservation',
         }
     });
 
-app.post('/CreateReservation',
+router.post('/CreateReservation',
     async (request, response) => {
         let conn;
         const pe = request.query.patientEmail;
@@ -69,7 +69,7 @@ app.post('/CreateReservation',
         }
     });
 
-app.put('/UpdateReservation',
+router.put('/UpdateReservation',
     async (request, response) => {
         let conn;
         const index = request.query.index;
