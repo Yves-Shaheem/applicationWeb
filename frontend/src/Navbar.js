@@ -38,6 +38,18 @@ const NavBar = () => {
                         <Link to="/HomePatient">HomePatient</Link>
                     </li>
 
+                    
+                    <li> 
+                        <Link to="/HomePatient">HomePatient</Link>
+                    </li>
+
+                    <li>
+                        <Link to="/HomeDocteur">HomeDocteur</Link>
+                    </li>
+                    <li> 
+                        <Link to="/RechercherDocteur">RechercherDocteur</Link>
+                    </li>
+
 
 
                 </ul>

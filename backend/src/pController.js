@@ -44,11 +44,23 @@ router.get('/patient',
 router.post('/CreatePatient',
     async (req, response) => {
         let conn;
+        
         const fn = req.body.firstname;
         const ln = req.body.lastname;
         const rq = req.body.ramq;
         const el = req.body.email;
+<<<<<<< HEAD
         const pass = req.body.pass;
+=======
+
+        //Pour tester les autres pages qui avaient besoin des donners
+/*
+        const fn = req.query.firstname;
+        const ln = req.query.lastname;
+        const rq = req.query.ramq;
+        const el = req.query.email;
+*/
+>>>>>>> e484aa24305b02655a02c36af3e7f28997774373
         const st = true;
         const values = [fn, ln, rq,el,pass,st];
         try {

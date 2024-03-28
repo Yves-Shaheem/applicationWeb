@@ -16,15 +16,16 @@ function SeConnecter() {
           </div>
           <br/>
             <button type="button" className="btn btn-primary">Connectez-vous</button>
-                
-                </form>
-
+            </form>
+            <br/>
+            <h5>Vous avez oublié votre mot de passe ? </h5>
+            <li>
+            <Link to="/OublieMotDePasse">Changez votre mot de passe</Link></li>
+                <br/>
             <h3> Vous n'avez pas de compte?</h3>
-           
             <li> 
                 <Link to="/Inscription">Inscrivez-vous ici.</Link>
             </li>
-         
                 </div>
             </div>
     )
