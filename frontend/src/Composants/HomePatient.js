@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, {useEffect} from "react";
- 
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css"
+
 function HomePatient (){
  
     const baseURL = "http://localhost:5000/reservation";
@@ -17,6 +19,7 @@ function HomePatient (){
             .catch(err => console.log(err));
  
 }, [])
+
 /*
 const supprimer=(index)=>{
     const newList=[...listItems]
@@ -24,6 +27,8 @@ const supprimer=(index)=>{
     setListe(newList)
 }
  */
+
+
 const postData=(id)=>{
     axios.put(baseURL2,{
         index:id,
@@ -33,8 +38,8 @@ const postData=(id)=>{
             console.log(res.data);
             setReservation(todo=>todo.filter(resv=>resv.reservation_id!==id));//source1: Voir a la fin de la page
         })
-        
-       /*
+
+          /*
        .then(res=>{
         console.log(res.data)
         const updateReservation=[...reservation]
@@ -43,6 +48,8 @@ const postData=(id)=>{
        })
        //Erreur de logique, marche pas correctement
 */
+        
+
         .catch(err=>console.log(err));
         
 }

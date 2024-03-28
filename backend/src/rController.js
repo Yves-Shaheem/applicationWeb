@@ -23,7 +23,7 @@ router.get('/reservation',
             if(conn){
                 console.log("Connected to DB");
             }
-            const query = "Select * from reservation";
+            const query = "Select * from reservation where status=1";
             const rs = await conn.query(query);
             console.log(rs);
             return response.json(rs);
@@ -53,7 +53,7 @@ router.post('/CreateReservation',
             if(conn){
                 console.log("Connected to DB");
             }
-            const query = "Insert into reservation(patientEmail,ramq,doctorEmail,temps, raison, status) values(?,?,?,?,?)";
+            const query = "Insert into reservation(patientEmail,ramq,doctorEmail,temps, raison, status) values(?,?,?,?,?,?)";
             const rs = await conn.prepare(query);
             await rs.execute(values);
             console.log(rs);
@@ -72,8 +72,8 @@ router.post('/CreateReservation',
 router.put('/UpdateReservation',
     async (request, response) => {
         let conn;
-        const index = request.query.index;
-        const status = request.query.status;
+        const index = request.body.index;
+        const status = request.body.status;
 
         const values = [status,index];
         try {
@@ -82,6 +82,37 @@ router.put('/UpdateReservation',
                 console.log("Connected to DB");
             }
             const reservation = "Update reservation Set status= ? where reservation_id= ?";
+            const rs = await conn.prepare(reservation);
+            await rs.execute(values);
+            console.log(rs);
+            response.send("OK");
+            //return response.json(rs);
+        }
+        catch (error) {
+            console.log(error);
+        } finally {
+            if (conn) {
+                conn.end;
+            }
+            // Ultra important pour éviter les injections SQL
+        }
+    });
+
+    router.put('/UpdateReservationTime',
+    async (request, response) => {
+        let conn;
+        const index = request.body.index;
+        const temps=request.body.temps;
+      
+
+
+        const values = [temps,index];
+        try {
+            conn = await db.getConnection();
+            if(conn){
+                console.log("Connected to DB");
+            }
+            const reservation = "Update reservation Set temps=? where reservation_id=?";
             const rs = await conn.prepare(reservation);
             await rs.execute(values);
             console.log(rs);
