@@ -15,6 +15,8 @@ import HomePatient from "./Composants/HomePatient";
 import AdminPanel from "./Composants/AdminPanel";
 import Faq from "./Composants/Faq";
 import HomeDocteur from "./Composants/HomeDocteur";
+import OublieMotDePasse from "./Composants/OublieMotDePasse";
+import RechercherDocteur from './Composants/RechercherDocteur';
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
           <Route path='/Admin' element={<AdminPanel/>} />
           <Route path='/Faq' element={<Faq/>} />
           <Route path='/HomeDocteur' element={<HomeDocteur/>}/>
+          <Route path='/OublieMotDePasse' element={<OublieMotDePasse/>} />
+          <Route path='/RechercherDocteur' element={<RechercherDocteur/>} />
 
         </Routes>
       </div>

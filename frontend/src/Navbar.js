@@ -46,6 +46,9 @@ const NavBar = () => {
                     <li>
                         <Link to="/HomeDocteur">HomeDocteur</Link>
                     </li>
+                    <li> 
+                        <Link to="/RechercherDocteur">RechercherDocteur</Link>
+                    </li>
 
 
 
