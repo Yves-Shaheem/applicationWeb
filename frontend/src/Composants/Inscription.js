@@ -8,18 +8,18 @@ function Inscription(){
     * @author Shaheem
     *  */
     const baseURL = "http://localhost:5000/CreatePatient";
-
+    const findDup= "http://localhost:5000/Patient";
+    const [checked, setChecked] = React.useState(true);
     const patientValues = {
         firstname: "",
         lastname: "",
         ramq:"",
         email:"",
-        password:""
+        password:"",
+        TermsOfUse:checked
     }
-
-
     const [patient, setPatient] = React.useState(patientValues);
-    const[formErrors, setFormErrors] = React.useState([]);
+    const[formErrors, setFormErrors] = React.useState({});
     function handleChange(event) {
         setPatient(
             {
@@ -29,44 +29,43 @@ function Inscription(){
     )}
     function isValidE(email) {
         let regex = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
-        let flag = regex.test(email)
-        return flag;
-
+        return regex.test(email);
     };
     function isValidR(ramq) {
         let regex = /^(?=^.{12}$)[A-Z]{4}\d*$/
-        let flag = regex.test(ramq)
-        return flag;
-
+        return regex.test(ramq);
     };
     function DataValidation(inputValues) {
-        const errors ={};
+        const errors ={
+            value:"",
+            termsOfUse:"",
+            ramq:"",
+            email:""
+        };
         if(!inputValues.lastname || !inputValues.firstname
-            || !inputValues.email || !inputValues.ramq || !inputValues.password){
-            errors.value = "Aucun champ ne doit etre vide ! ";
-        }
-        if(!isValidR(inputValues.ramq)){
-            errors.ramq = "Veuillez rentrer l'information comme telle 'XXXX00000000' ";
-        }
-        if(!isValidE(inputValues.email)){
-            errors.email = "Veuillez entrez un email valide";
-        }
+            || !inputValues.email || !inputValues.ramq || !inputValues.password) {
+            errors.value = "Aucun champ ne doit etre vide ! ";}
+        if(checked) errors.termsOfUse = "Accept terms of use !";
+
+        if(!isValidR(inputValues.ramq)) errors.ramq = "Veuillez rentrer l'information comme telle 'XXXX00000000' ";
+
+        if(!isValidE(inputValues.email)) errors.email = "Veuillez entrez un email valide";
+
         return errors;
     }
     function handleSubmit(event){
         event.preventDefault();
-
-        setFormErrors([...formErrors, DataValidation(patient) ])
-        console.log(patient);
+        setFormErrors(DataValidation(patient));
         const userData = {
             firstname:patient.firstname,
             lastname: patient.lastname,
             ramq:patient.ramq,
-            email:patient.email
+            email:patient.email,
+            pass:patient.password
         }
         console.log(userData);
-        console.log(formErrors);
-        if(formErrors.size == 0){
+        if(formErrors.ramq === "" && formErrors.email === "" && formErrors.value === "" && formErrors.termsOfUse === ""){
+            console.log("No errors Perfect");
             axios.post(baseURL, userData,{
                 headers: {
                     'Content-Type': 'application/json'
@@ -78,6 +77,7 @@ function Inscription(){
     }
     /*
     * author Shaheem Yanni*/
+
     return(
         <div className="hero">
             <div className="col-12">
@@ -107,14 +107,17 @@ function Inscription(){
                     <input onChange={handleChange} type="password" name="password" />
                 </div>
                 <br></br>
-                <input type="checkbox" name="TermsOfUse" value="" /> &nbsp;
+                <input type="checkbox" name="TermsOfUse"  onChange={() => {setChecked(!checked);}} value={checked}/> &nbsp;
                 <Link to="/TermsOfUse">Accept terms of use.</Link>
          
                 <br></br><br></br>
-                <p> <span style={{color:"red"}}>{formErrors.value}<br/>
-                 {formErrors.ramq}<br/>
-                {formErrors.email}</span></p>
-      <button onClick={handleSubmit} type="button" className="btn btn-primary">Inscrivez-vous</button>
+                <p> <span style={{color: "red"}}>
+                    {formErrors.termsOfUse}<br/>
+                    {formErrors.value}<br/>
+                    {formErrors.ramq}<br/>
+                    {formErrors.email}<br/>
+                </span></p>
+                <button onClick={handleSubmit} type="button" className="btn btn-primary">Inscrivez-vous</button>
     </form>
     </div>
     </div>

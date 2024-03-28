@@ -48,14 +48,15 @@ router.post('/CreatePatient',
         const ln = req.body.lastname;
         const rq = req.body.ramq;
         const el = req.body.email;
+        const pass = req.body.pass;
         const st = true;
-        const values = [fn, ln, rq,el,st];
+        const values = [fn, ln, rq,el,pass,st];
         try {
             conn = await db.getConnection();
             if(conn){
                 console.log("Connected to DB");
             }
-            const query = "Insert into patient(firstname, lastname, ramq,email,status) values(?,?,?,?,?)";
+            const query = "Insert into patient(firstname, lastname, ramq,email,password,status) values(?,?,?,?,?,?)";
             const rs = await conn.prepare(query);
             await rs.execute(values);
             console.log(rs);
@@ -127,6 +128,7 @@ router.put('/DeletePatient',
             // Ultra important pour éviter les injections SQL
         }
     });
+
 
 
 router.get('/status', async (request, response) => {
