@@ -6,10 +6,12 @@ import axios from "axios";
 function Inscription(){
     /*
     * @author Shaheem
-    *  */
+    *
+    * */
     const baseURL = "http://localhost:5000/CreatePatient";
     const findDup= "http://localhost:5000/Patient";
     const [checked, setChecked] = React.useState(true);
+    let success ="";
     const patientValues = {
         firstname: "",
         lastname: "",
@@ -42,14 +44,15 @@ function Inscription(){
             ramq:"",
             email:""
         };
-        if(!inputValues.lastname || !inputValues.firstname
-            || !inputValues.email || !inputValues.ramq || !inputValues.password) {
+        console.log(inputValues);
+        if(!inputValues.lastname[0] || !inputValues.firstname[0]
+            || !inputValues.email[0] || !inputValues.ramq[0] || !inputValues.password[0]) {
             errors.value = "Aucun champ ne doit etre vide ! ";}
         if(checked) errors.termsOfUse = "Accept terms of use !";
 
-        if(!isValidR(inputValues.ramq)) errors.ramq = "Veuillez rentrer l'information comme telle 'XXXX00000000' ";
+        if(!isValidR(inputValues.ramq[0])) errors.ramq = "Veuillez rentrer l'information comme telle 'XXXX00000000' ";
 
-        if(!isValidE(inputValues.email)) errors.email = "Veuillez entrez un email valide";
+        if(!isValidE(inputValues.email[0])) errors.email = "Veuillez entrez un email valide";
 
         return errors;
     }
@@ -57,13 +60,12 @@ function Inscription(){
         event.preventDefault();
         setFormErrors(DataValidation(patient));
         const userData = {
-            firstname:patient.firstname,
-            lastname: patient.lastname,
-            ramq:patient.ramq,
-            email:patient.email,
-            pass:patient.password
+            firstname:patient.firstname[0],
+            lastname: patient.lastname[0],
+            ramq:patient.ramq[0],
+            email:patient.email[0],
+            pass:patient.password[0]
         }
-        console.log(userData);
         if(formErrors.ramq === "" && formErrors.email === "" && formErrors.value === "" && formErrors.termsOfUse === ""){
             console.log("No errors Perfect");
             axios.post(baseURL, userData,{
@@ -76,7 +78,8 @@ function Inscription(){
 
     }
     /*
-    * author Shaheem Yanni*/
+    * author Shaheem Yanni
+    * */
 
     return(
         <div className="hero">
@@ -118,6 +121,7 @@ function Inscription(){
                     {formErrors.email}<br/>
                 </span></p>
                 <button onClick={handleSubmit} type="button" className="btn btn-primary">Inscrivez-vous</button>
+
     </form>
     </div>
     </div>
