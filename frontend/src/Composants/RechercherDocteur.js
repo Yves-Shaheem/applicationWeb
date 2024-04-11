@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, {useEffect} from "react";
+import Popup from "reactjs-popup";
+
 
 function RechercherDocteur(){
 
@@ -40,16 +42,13 @@ function handleChange(event) {
                 </button>
             </div>
 
-            <div className="resultat"></div>
-            <h4>Résultat à votre recherche  </h4>
-                <table>
+            <div className="resultat">
+            <h4>Résultat à votre recherche</h4>
+                <table className="table">
                     <thead>
                     <tr>
                         <th>Nom</th>
-
                         <th>Prenom</th>
-
-                        <th>Spécialité</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,19 +56,23 @@ function handleChange(event) {
                     { value &&
                         docteur
                         .filter((user) => 
-                            user.firstname.toLowerCase().includes(value.toLowerCase()) // Filtrer 
+                            user.firstname.includes(value) && user.firstname.startsWith(value, 0) || user.lastname.includes(value) && user.lastname.startsWith(value,0) // Filtrer 
                         )
+                        
+
+                        
 
                         .map((user, i) => ( // Bouclé
-                            <tr onClick={() => setDocteur(user)} key={i}> 
+                            <tr onClick={() => console.log("Clique réussi")} key={i}> 
                                 <td>{user.firstname}</td>
                                 <td>{user.lastname}</td>
-                                <td>{user.specialite}</td>
+                                <td><Popup trigger={<button className="btn btn-info">Voir les infos</button>} modal nested>{}</Popup></td>
                             </tr>
                         ))
                     }
                     </tbody>
                 </table>
+        </div>
         </div>
     </div>
     )
