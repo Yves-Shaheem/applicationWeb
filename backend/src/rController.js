@@ -105,7 +105,6 @@ router.put('/UpdateReservation',
         const temps=request.body.temps;
       
 
-
         const values = [temps,index];
         try {
             conn = await db.getConnection();

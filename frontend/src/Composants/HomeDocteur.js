@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, {useEffect} from "react";
 import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
 
 
 
@@ -57,16 +56,24 @@ const postData=(id)=>{
         
 }
 
-    const postData2=(id)=>{
+    const postData2=(id,newTemps)=>{
         axios.put(baseURL3, {
             index:id,
-            status:false
+            temps:newTemps
         })
         .then(res=>{
             console.log(res.data);
-            setReservation(todo=>todo.filter(resv=>resv.reservation_id!==id));//source1: Voir a la fin de la page
+            
         })
     }
+
+    function handleChange(event) {
+        setReservation(
+            {
+            ...reservation,
+            [event.target.name] : [event.target.value]
+            }
+    )}
 
 
     return (
@@ -108,9 +115,19 @@ const postData=(id)=>{
                                                     <div className="content">
                                                         Modifier votre temps de RV
                                                     </div>
+                                                    <form /*onSubmit={postData2(resv.reservation_id,newTemps)}*/>
+                                                    <div>New temps:
+                                                        <input /*onChange={handleChange} */type="text" name="newTemps"></input>
+                                                    </div>
+                                                    <br></br>
+                                                    <div>
+                                                        <button /*</div>onClick={()=>postData2(resv.reservation_id, newTemps)}*/>Add new time</button>
+                                                    </div>
+                                                    <br></br>
                                                     <div>
                                                         <button onClick={()=>close()}>Close page</button>
                                                     </div>
+                                                    </form>
                                                 </div>
                                             )
                                         }
@@ -129,7 +146,7 @@ const postData=(id)=>{
  
         </div>
     );
-    }
+}
     export default HomeDocteur;
 
     /*
