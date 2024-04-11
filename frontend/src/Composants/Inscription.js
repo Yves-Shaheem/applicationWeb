@@ -9,9 +9,9 @@ function Inscription(){
     *
     * */
     const baseURL = "http://localhost:5000/CreatePatient";
-    const findDup= "http://localhost:5000/Patient";
     const [checked, setChecked] = React.useState(true);
-    let success ="";
+    const [success, setSuccess] = React.useState("");
+    const [openModal, isOpenModal] = React.useState(false);
     const patientValues = {
         firstname: "",
         lastname: "",
@@ -67,7 +67,8 @@ function Inscription(){
             pass:patient.password[0]
         }
         if(formErrors.ramq === "" && formErrors.email === "" && formErrors.value === "" && formErrors.termsOfUse === ""){
-            console.log("No errors Perfect");
+            setSuccess("Votre compte a été créé avec succès");
+            console.log(success);
             axios.post(baseURL, userData,{
                 headers: {
                     'Content-Type': 'application/json'
@@ -75,6 +76,8 @@ function Inscription(){
                 .then((res) =>{ console.log(res.status, res.data)})
                 .catch(err => console.log(err));
         }
+    }
+    const showMessage = () =>{
 
     }
     /*
@@ -85,48 +88,54 @@ function Inscription(){
         <div className="hero">
             <div className="col-12">
                 <h1>Inscriptions</h1>
-            <form  onSubmit={handleSubmit}>
-                <div>
-                    Prénom: <span style={{color:"red"}}>*</span><br />
-                    <input onChange={handleChange} type="text" name="firstname" />
-                </div>
-          
-                <div>
-                    Nom: <span style={{color:"red"}}>*</span><br/>
-                    <input onChange={handleChange} type="text" name="lastname" />
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        Prénom: <span style={{color: "red"}}>*</span><br/>
+                        <input onChange={handleChange} type="text" name="firstname"/>
+                    </div>
 
-                <div>
-                    RAMQ: <span style={{color:"red"}}>*</span><br/>
-                    <input onChange={handleChange} type="text" name="ramq" maxLength={12} />
-                </div>
-                <div>
-                    Email: <span style={{color: "red"}}>*</span> <br/>
-                    <input onChange={handleChange} type="text" name="email" />
-                </div>
+                    <div>
+                        Nom: <span style={{color: "red"}}>*</span><br/>
+                        <input onChange={handleChange} type="text" name="lastname"/>
+                    </div>
 
-                <div>
-                    Password: <span style={{color:"red"}}>*</span><br/>
-                    <input onChange={handleChange} type="password" name="password" />
-                </div>
-                <br></br>
-                <input type="checkbox" name="TermsOfUse"  onChange={() => {setChecked(!checked);}} value={checked}/> &nbsp;
-                <Link to="/TermsOfUse">Accept terms of use.</Link>
-         
-                <br></br><br></br>
-                <p> <span style={{color: "red"}}>
-                    {formErrors.termsOfUse}<br/>
-                    {formErrors.value}<br/>
-                    {formErrors.ramq}<br/>
-                    {formErrors.email}<br/>
-                </span></p>
-                <button onClick={handleSubmit} type="button" className="btn btn-primary">Inscrivez-vous</button>
+                    <div>
+                        RAMQ: <span style={{color: "red"}}>*</span><br/>
+                        <input onChange={handleChange} type="text" name="ramq" maxLength={12}/>
+                    </div>
+                    <div>
+                        Email: <span style={{color: "red"}}>*</span> <br/>
+                        <input onChange={handleChange} type="text" name="email"/>
+                    </div>
 
-    </form>
-    </div>
-    </div>
-)
+                    <div>
+                        Password: <span style={{color: "red"}}>*</span><br/>
+                        <input onChange={handleChange} type="password" name="password"/>
+                    </div>
+                    <br></br>
+                    <input type="checkbox" name="TermsOfUse" onChange={() => {
+                        setChecked(!checked);
+                    }} value={checked}/> &nbsp;
+                    <Link to="/TermsOfUse">Accept terms of use.</Link>
+                    <br/>
 
+                    <p> <span className="text-danger">
+                                        {formErrors.termsOfUse}<br/>
+                        {formErrors.value}<br/>
+                        {formErrors.ramq}<br/>
+                        {formErrors.email}<br/>
+                                        </span>
+                        <span className="text-success">{success}</span><br/>
+                    </p>
 
+                    <button onClick={handleSubmit} type="button" className="btn btn-primary">
+                        Inscrivez-vous
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    )
 }
+
 export default Inscription;
