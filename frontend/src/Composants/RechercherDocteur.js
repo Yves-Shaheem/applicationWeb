@@ -6,7 +6,7 @@ import Popup from "reactjs-popup";
 function RechercherDocteur(){
 
 
-    // Données docteur
+    // Données docteurs
     const getDocteur = "http://localhost:5000/docteur";
     const [docteur, setDocteur] = React.useState([]);
 
