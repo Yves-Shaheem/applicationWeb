@@ -1,10 +1,6 @@
 import axios from "axios";
 import React, {useEffect} from "react";
 import Popup from 'reactjs-popup';
-
-
-
-
  
 function HomeDocteur (){
  
@@ -12,6 +8,7 @@ function HomeDocteur (){
     const baseURL2="http://localhost:5000/UpdateReservation";
     const baseURL3="http://localhost:5000/UpdateReservationTime";
     const [reservation, setReservation] = React.useState([]);
+    const [newTemps,setNewTemps]=React.useState("");
  
    
    
@@ -23,13 +20,7 @@ function HomeDocteur (){
  
 }, [])
 
-/*
-const supprimer=(index)=>{
-    const newList=[...listItems]
-    newList.splice(index,1)
-    setListe(newList)
-}
- */
+
 
 const postData=(id)=>{
     axios.put(baseURL2,{
@@ -41,22 +32,11 @@ const postData=(id)=>{
             setReservation(todo=>todo.filter(resv=>resv.reservation_id!==id));//source1: Voir a la fin de la page
         })
 
-          /*
-       .then(res=>{
-        console.log(res.data)
-        const updateReservation=[...reservation]
-        updateReservation.splice(id,1)
-        setReservation(updateReservation)
-       })
-       //Erreur de logique, marche pas correctement
-*/
-        
-
         .catch(err=>console.log(err));
         
 }
 
-    const postData2=(id,newTemps)=>{
+    const postData2=(id)=>{
         axios.put(baseURL3, {
             index:id,
             temps:newTemps
@@ -66,15 +46,19 @@ const postData=(id)=>{
             
         })
     }
+    /*
 
     function handleChange(event) {
-        setReservation(
-            {
-            ...reservation,
+        setNewTemps(
+            {...newTemps,
             [event.target.name] : [event.target.value]
-            }
-    )}
+        }
+        )}
 
+*/
+        function handleChange (event) {
+           setNewTemps(event.target.value);
+        }
 
     return (
         <div className="hero">
@@ -115,13 +99,13 @@ const postData=(id)=>{
                                                     <div className="content">
                                                         Modifier votre temps de RV
                                                     </div>
-                                                    <form /*onSubmit={postData2(resv.reservation_id,newTemps)}*/>
+                                                    <form >
                                                     <div>New temps:
-                                                        <input /*onChange={handleChange} */type="text" name="newTemps"></input>
+                                                        <input type="text" value={newTemps} onChange={handleChange} name="newTemps"></input>
                                                     </div>
                                                     <br></br>
                                                     <div>
-                                                        <button /*</div>onClick={()=>postData2(resv.reservation_id, newTemps)}*/>Add new time</button>
+                                                        <button onClick={()=>postData2(resv.reservation_id)}>Add new time</button>
                                                     </div>
                                                     <br></br>
                                                     <div>
