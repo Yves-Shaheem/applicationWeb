@@ -74,8 +74,8 @@ router.put('/UpdateReservation',
         let conn;
         const index = request.body.index;
         const status = request.body.status;
-
         const values = [status,index];
+
         try {
             conn = await db.getConnection();
             if(conn){
