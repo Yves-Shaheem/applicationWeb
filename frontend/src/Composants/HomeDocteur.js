@@ -60,10 +60,13 @@ const postData=(id)=>{
            setNewTemps(event.target.value);
         }
 
+
+
     return (
-        <div className="hero">
-            <div className="container">
-                <h1>Page HomePatient</h1>
+        <div className="container">
+        <div className="hero col-6">
+            <div>
+                <h1>Page HomeDocteur</h1>
                 <table className="table table-striped">
                     <thead>
                     <h3>Liste des reservations</h3>
@@ -127,8 +130,40 @@ const postData=(id)=>{
                 </table>
  
             </div>
- 
+            
+            <div className="col-12">
+
+            <h3>Soumissions des résultats</h3>
+            <form >
+            <div>
+            PatientEmail: <br />
+            <input type="text" name="patientEmail"/>
+          </div>
+
+          <div>
+            RAMQ: <br />
+            <input type="text" name="ramq" />
+          </div>
+
+          <div>
+            DocteurEmail: <br />
+            <input type="text" name="docteurEmail" maxLength={12}/>
+          </div>
+
+          <div>
+            Message: <br />
+            <textarea type="text" name="message" rows="4" cols="50" />
+          </div>
+
+
+            </form>
+            
+
+            </div>
+
+            </div>
         </div>
+        
     );
 }
     export default HomeDocteur;
