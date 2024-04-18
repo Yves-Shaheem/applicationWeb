@@ -98,9 +98,9 @@ router.put('/DeleteDoctor',
     async (request, response) => {
         let conn;
         const index = request.query.id;
-        const st =false;
+        const status =false;
 
-        const values = [st,index];
+        const values = [status,index];
         try {
             conn = await db.getConnection();
             if(conn){
@@ -150,8 +150,8 @@ router.get('/resultat',
 router.post('/CreateResultat',
     async (request, response) => {
         let conn;
-        const rq = request.query.ramq;
-        const pe = request.query.patientEmail;
+        const rq = request.body.ramq;
+        const pe = request.bodybody.patientEmail;
         const de = request.query.docteurEmail;
         const ms = request.query.message;
         const st = true;

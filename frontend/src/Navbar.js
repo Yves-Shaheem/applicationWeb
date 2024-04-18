@@ -4,45 +4,52 @@ import { Link } from "react-router-dom"
 
 const NavBar = () => {
     return(
-        <nav className="nav">
-            <div className="container">
-                <Link to="/Admin">AdminPanel</Link>
-                <h1 className="logo"><Link to="/">MedHub</Link></h1>
-                <ul>
-                    <li> 
-                        <Link to="/">Home</Link>
+        <nav className="navbar nav-light ">
+            <div className="container-fluid">
+                <Link to="/Admin" className="nav-link">AdminPanel</Link>
+                <h1 className="navbar-brand">MedHub</h1>
+                <ul className="navbar-nav d-flex flex-row">
+                    <li className="nav-item">
+                        <Link to="/HomePatient" className="nav-link">HomePatient</Link>
                     </li>
-                    <li> 
-                        <Link to="/About">About</Link>
+                    <li className="nav-item">
+                        <Link to="/HomeDocteur" className="nav-link">HomeDocteur</Link>
                     </li>
-                    <li> 
-                        <Link to="/Services">Services</Link>
+                    <li className="nav-item">
+                        <Link to="/About" className="nav-link">About</Link>
                     </li>
-                    <li> 
-                        <Link to="/Contact">Contact</Link>
+                    <li className="nav-item">
+                        <Link to="/Services" className="nav-link">Services</Link>
                     </li>
-                    <li> 
-                        <Link to="/Inscription">Inscription</Link>
+                    <li className="nav-item">
+                        <Link to="/Contact" className="nav-link">Contact</Link>
                     </li>
-                    <li> 
-                        <Link to="/SeConnecter">Se Connecter</Link>
+                    <li className="nav-item">
+                        <Link to="/Inscription" className="nav-link">Inscription</Link>
                     </li>
-                    <li> 
-                        <Link to="/RendezVous">Rendez-vous</Link>
+                    <li className="nav-item">
+                        <Link to="/SeConnecter" className="nav-link">Se Connecter</Link>
                     </li>
-
-                    <li> 
-                        <Link to="/HomePatient">HomePatient</Link>
+                    <li className="nav-item">
+                        <Link to="/RendezVous" className="nav-link">Rendez-vous</Link>
                     </li>
-
-                    <li>
-                        <Link to="/HomeDocteur">HomeDocteur</Link>
+                    <li className="nav-item">
+                        <Link to="/RechercherDocteur" className="nav-link">RechercherDocteur</Link>
                     </li>
-                    <li> 
-                        <Link to="/RechercherDocteur">RechercherDocteur</Link>
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul className="dropdown-menu">
+                            <li><a className="dropdown-item" href="#">Action</a></li>
+                            <li><a className="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr className="dropdown-divider"/>
+                            </li>
+                            <li><a className="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
                     </li>
-
-
 
                 </ul>
             </div>

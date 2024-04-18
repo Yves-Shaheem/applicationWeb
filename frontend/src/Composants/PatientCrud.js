@@ -29,37 +29,35 @@ function PatientCrud() {
 
     }, [])
     return (
-        <div className="hero">
-            <div className="container">
-                <table>
-                    <thead>
+        <table className="table table-sm table-bordered">
+            <caption>Liste des patients</caption>
+               <thead>
                     <tr>
-                        <th>Prénom</th>
-                        <th>Nom</th>
-                        <th>ramq</th>
-                        <th>email</th>
-                        <th>status</th>
+                        <th scope="col">Nom complet</th>
+                        <th scope="col">Ramq</th>
+                        <th scope="col">Email </th>
+                        <th scope="col">Status activité</th>
+                        <th scope="col">Désactiver Compte</th>
                     </tr>
-                    </thead>
-                    <tbody>
+               </thead>
+                <tbody>
                     {
-                        patient.map((user,i) => (
-                            <tr key={user.user_id}>
-                                <td>{user.firstname}  </td>
-                                <td>{user.lastname} </td>
-                                <td>{user.ramq}  </td>
-                                <td>{user.email}  </td>
-                                <td>{user.status}  </td>
-                                <td><button className="btn btn-danger" onClick={() => deletePatientData(user.user_id)}>Fermer le compte</button></td>
-                            </tr>
+                    patient.map((user, i) => (
+                        <tr key={user.user_id}>
+                            <td>{user.firstname} {user.lastname}  </td>
+                            <td>{user.ramq}  </td>
+                            <td>{user.email}  </td>
+                            <td>{user.status}  </td>
+                            <td>
+                                <button className="btn btn-danger btn-sm"
+                                    onClick={() => deletePatientData(user.user_id)}>Fermer le compte
+                                </button>
+                            </td>
+                        </tr>
                         ))
                     }
-                    </tbody>
-                </table>
-
-            </div>
-
-        </div>
+                </tbody>
+        </table>
     );
 }
 
