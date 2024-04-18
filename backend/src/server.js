@@ -4,6 +4,7 @@ import cors from "cors";
 import patientRoute from  "./pController.js";
 import docteurRoute from "./dController.js";
 import reservationRoute from "./rController.js";
+import resultatRoute from "./resultatController.js";
 
 
 const app = express();
@@ -15,6 +16,7 @@ const port = 5000;
 app.use(patientRoute);
 app.use(docteurRoute);
 app.use(reservationRoute);
+app.use(resultatRoute);
 
 
 app.listen(port, () => {
