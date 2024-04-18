@@ -8,8 +8,6 @@ function AdminPanel() {
         <div className="hero">
             <div className="container">
                 <PatientCrud/>
-
-
             </div>
 
 

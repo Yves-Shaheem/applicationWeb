@@ -24,7 +24,7 @@ router.get('/patient',
             if(conn){
                 console.log("Connected to DB");
             }
-            const toto = "Select * from patient where status=true";
+            const toto = "Select * from patient where status=1";
             const rs = await conn.query(toto);
             console.log(rs);
             return response.json(rs);
@@ -113,16 +113,15 @@ router.put('/UpdatePatient',
 router.put('/DeletePatient',
     async (request, response) => {
         let conn;
-        const index = request.query.id;
-        const st =false;
-
-        const values = [st,index];
+        const index = request.body.index;
+        const status =false;
+        const values = [status,index];
         try {
             conn = await db.getConnection();
             if(conn){
                 console.log("Connected to DB");
             }
-            const patient = "Update patient Set status= ? where patient_id= ?";
+            const patient = "Update patient Set status= ? where user_id= ?";
             const rs = await conn.prepare(patient);
             await rs.execute(values);
             console.log(rs);

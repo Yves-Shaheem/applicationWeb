@@ -10,8 +10,6 @@ function Inscription(){
     * */
     const baseURL = "http://localhost:5000/CreatePatient";
     const [checked, setChecked] = React.useState(true);
-    const [success, setSuccess] = React.useState("");
-    const [openModal, isOpenModal] = React.useState(false);
     const patientValues = {
         firstname: "",
         lastname: "",
@@ -42,18 +40,25 @@ function Inscription(){
             value:"",
             termsOfUse:"",
             ramq:"",
-            email:""
+            email:"",
+            success:"Votre compte a été créer"
         };
         console.log(inputValues);
         if(!inputValues.lastname[0] || !inputValues.firstname[0]
             || !inputValues.email[0] || !inputValues.ramq[0] || !inputValues.password[0]) {
-            errors.value = "Aucun champ ne doit etre vide ! ";}
-        if(checked) errors.termsOfUse = "Accept terms of use !";
+            errors.value = "Aucun champ ne doit etre vide ! ";
+            errors.success = "";
+        }
+        if(checked){ errors.termsOfUse = "Accept terms of use !"; errors.success = "" ;}
 
-        if(!isValidR(inputValues.ramq[0])) errors.ramq = "Veuillez rentrer l'information comme telle 'XXXX00000000' ";
-
-        if(!isValidE(inputValues.email[0])) errors.email = "Veuillez entrez un email valide";
-
+        if(!isValidR(inputValues.ramq[0])) {
+            errors.success = "";
+            errors.ramq = "Veuillez rentrer l'information comme telle 'XXXX00000000' ";
+        }
+        if(!isValidE(inputValues.email[0])) {
+            errors.success = "";
+            errors.email = "Veuillez entrez un email valide";
+        }
         return errors;
     }
     function handleSubmit(event){
@@ -67,8 +72,6 @@ function Inscription(){
             pass:patient.password[0]
         }
         if(formErrors.ramq === "" && formErrors.email === "" && formErrors.value === "" && formErrors.termsOfUse === ""){
-            setSuccess("Votre compte a été créé avec succès");
-            console.log(success);
             axios.post(baseURL, userData,{
                 headers: {
                     'Content-Type': 'application/json'
@@ -77,9 +80,7 @@ function Inscription(){
                 .catch(err => console.log(err));
         }
     }
-    const showMessage = () =>{
 
-    }
     /*
     * author Shaheem Yanni
     * */
@@ -120,18 +121,16 @@ function Inscription(){
                     <br/>
 
                     <p> <span className="text-danger">
-                                        {formErrors.termsOfUse}<br/>
+                        {formErrors.termsOfUse}<br/>
                         {formErrors.value}<br/>
                         {formErrors.ramq}<br/>
                         {formErrors.email}<br/>
                                         </span>
-                        <span className="text-success">{success}</span><br/>
+                        <span className="text-success">{formErrors.success}</span><br/>
                     </p>
-
                     <button onClick={handleSubmit} type="button" className="btn btn-primary">
                         Inscrivez-vous
                     </button>
-
                 </form>
             </div>
         </div>
