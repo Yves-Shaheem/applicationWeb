@@ -7,10 +7,79 @@ function HomeDocteur (){
     const baseURL = "http://localhost:5000/reservation";
     const baseURL2="http://localhost:5000/UpdateReservation";
     const baseURL3="http://localhost:5000/UpdateReservationTime";
+    const baseURL4="http://localhost:5000/CreateResultat";
     const [reservation, setReservation] = React.useState([]);
     const [newTemps,setNewTemps]=React.useState("");
- 
-   
+
+    const ResultatValues = {
+        ramq:"",
+        patientEmail: "",
+        doctorEmail: "",
+        message:""
+    }
+    const [resultat, setResultat] = React.useState(ResultatValues);
+    const[formErrors, setFormErrors] = React.useState({});
+
+    function handleChange2(event) {
+        setResultat(
+            {
+            ...resultat,
+            [event.target.name] : [event.target.value]
+            }
+    )}
+
+    function isValidE(email) {
+        let regex = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
+        return regex.test(email);
+    };
+    function isValidR(ramq) {
+        let regex = /^(?=^.{12}$)[A-Z]{4}\d*$/
+        return regex.test(ramq);
+    };
+
+    function DataValidation(inputValues) {
+        const errors ={
+            value:"",
+            ramq:"",
+            patientEmail:"",
+            doctorEmail:"",
+            message:""
+        };
+        console.log(inputValues);
+        if(!inputValues.ramq[0] || !inputValues.PatientEmail[0] || !inputValues.doctorEmail[0] || !inputValues.message[0]) {
+            errors.value = "Aucun champ ne doit etre vide ! ";}
+
+        if(!isValidR(inputValues.ramq[0])) errors.ramq = "Veuillez rentrer l'information comme telle 'XXXX00000000' ";
+
+        if(!isValidE(inputValues.PatientEmail[0])) errors.email = "Veuillez entrez un email patient valide";
+
+        if(!isValidE(inputValues.doctorEmail[0])) errors.email = "Veuillez entrez un email docteur valide";
+
+        return errors;
+    }
+
+    function handleSubmit(event){
+        event.preventDefault();
+        setFormErrors(DataValidation(resultat));
+        const userData = {
+            ramq:resultat.ramq[0],
+            patientEmail:resultat.patientEmail[0],
+            doctorEmail: resultat.doctorEmail[0],
+            message:resultat.message[0] 
+        }
+
+        if(formErrors.ramq === "" && formErrors.patientEmail === "" && formErrors.doctorEmail === "" && formErrors.value === ""){
+            <span>Votre formulaire est envoyé</span>
+            axios.post(baseURL4, userData,{
+                headers: {
+                    'Content-Type': 'application/json'
+                }})
+                .then((res) =>{ console.log(res.status, res.data)})
+                .catch(err => console.log(err));
+        }
+        
+    }
+
    
     useEffect(() => {
 
@@ -46,20 +115,12 @@ const postData=(id)=>{
             
         })
     }
-    /*
 
-    function handleChange(event) {
-        setNewTemps(
-            {...newTemps,
-            [event.target.name] : [event.target.value]
-        }
-        )}
-
-*/
         function handleChange (event) {
            setNewTemps(event.target.value);
         }
 
+        
 
 
     return (
@@ -137,23 +198,27 @@ const postData=(id)=>{
             <form >
             <div>
             PatientEmail: <br />
-            <input type="text" name="patientEmail"/>
+            <input type="text" name="patientEmail" onChange={handleChange2}/>
           </div>
 
           <div>
             RAMQ: <br />
-            <input type="text" name="ramq" />
+            <input type="text" name="ramq" maxLength={12} onChange={handleChange2} />
           </div>
 
           <div>
             DocteurEmail: <br />
-            <input type="text" name="docteurEmail" maxLength={12}/>
+            <input type="text" name="doctorEmail" onChange={handleChange2}/>
           </div>
 
           <div>
             Message: <br />
-            <textarea type="text" name="message" rows="4" cols="50" />
+            <textarea type="text" name="message" rows="4" cols="50" onChange={handleChange2} />
           </div>
+
+          <br></br>
+
+          <button onClick={handleSubmit} type="button" className="btn btn-primary">Envoyer le formulaire</button>
 
 
             </form>
