@@ -46,12 +46,12 @@ function HomeDocteur (){
             message:""
         };
         console.log(inputValues);
-        if(!inputValues.ramq[0] || !inputValues.PatientEmail[0] || !inputValues.doctorEmail[0] || !inputValues.message[0]) {
+        if(!inputValues.ramq[0] || !inputValues.patientEmail[0] || !inputValues.doctorEmail[0] || !inputValues.message[0]) {
             errors.value = "Aucun champ ne doit etre vide ! ";}
 
         if(!isValidR(inputValues.ramq[0])) errors.ramq = "Veuillez rentrer l'information comme telle 'XXXX00000000' ";
 
-        if(!isValidE(inputValues.PatientEmail[0])) errors.email = "Veuillez entrez un email patient valide";
+        if(!isValidE(inputValues.patientEmail[0])) errors.email = "Veuillez entrez un email patient valide";
 
         if(!isValidE(inputValues.doctorEmail[0])) errors.email = "Veuillez entrez un email docteur valide";
 
@@ -165,7 +165,7 @@ const postData=(id)=>{
                                                     </div>
                                                     <form >
                                                     <div>New temps:
-                                                        <input type="text" value={newTemps} onChange={handleChange} name="newTemps"></input>
+                                                        <input type="date" value={newTemps} onChange={handleChange} name="newTemps"></input>
                                                     </div>
                                                     <br></br>
                                                     <div>
@@ -195,7 +195,7 @@ const postData=(id)=>{
             <div className="col-12">
 
             <h3>Soumissions des résultats</h3>
-            <form >
+            <form onSubmit={handleSubmit} >
             <div>
             PatientEmail: <br />
             <input type="text" name="patientEmail" onChange={handleChange2}/>

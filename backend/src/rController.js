@@ -41,19 +41,19 @@ router.get('/reservation',
 router.post('/CreateReservation',
     async (request, response) => {
         let conn;
-        const pe = request.query.patientEmail;
-        const de = request.query.doctorEmail;
-        const rq = request.query.ramq;
-        const tp = request.query.temps;
-        const rn = request.query.raison;
+        const pe = request.body.email;
+        const rq = request.body.ramq;
+        const te = request.body.telephone;
+        const tp = request.body.temps;
+        const rn = request.body.raison;
         const st = true;
-        const values = [pe,rq,de,tp,rn,st];
+        const values = [pe,rq,te,tp,rn,st];
         try {
             conn = await db.getConnection();
             if(conn){
                 console.log("Connected to DB");
             }
-            const query = "Insert into reservation(patientEmail,ramq,doctorEmail,temps, raison, status) values(?,?,?,?,?,?)";
+            const query = "Insert into reservation(email,ramq,telephone,temps, raison, status) values(?,?,?,?,?,?)";
             const rs = await conn.prepare(query);
             await rs.execute(values);
             console.log(rs);

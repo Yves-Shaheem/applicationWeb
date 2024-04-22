@@ -42,17 +42,17 @@ router.post('/CreateResultat',
     async (request, response) => {
         let conn;
         const pe = request.body.patientEmail;
-        const de = request.body.doctorEmail;
         const rq = request.body.ramq;
+        const de = request.body.doctorEmail;
         const mess=request.body.message;
         const st = true;
-        const values = [rq,pe,de,mess,st];
+        const values = [pe,rq,de,mess,st];
         try {
             conn = await db.getConnection();
             if(conn){
                 console.log("Connected to DB");
             }
-            const query = "Insert into resultat(ramq,patientEmail,doctorEmail,message,status) values(?,?,?,?)";
+            const query = "Insert into resultat(patientEmail,ramq,doctorEmail,message,status) values(?,?,?,?,?)";
             const rs = await conn.prepare(query);
             await rs.execute(values);
             console.log(rs);
