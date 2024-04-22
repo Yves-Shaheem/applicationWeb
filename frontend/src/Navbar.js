@@ -2,55 +2,56 @@
 
 import { Link } from "react-router-dom"
 
-const NavBar = () => {
+function NavBar(){
     return(
-        <nav className="navbar nav-light ">
+        <nav className="navbar navbar-default ">
             <div className="container-fluid">
-                <Link to="/Admin" className="nav-link">AdminPanel</Link>
-                <h1 className="navbar-brand">MedHub</h1>
-                <ul className="navbar-nav d-flex flex-row">
-                    <li className="nav-item">
-                        <Link to="/HomePatient" className="nav-link">HomePatient</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/HomeDocteur" className="nav-link">HomeDocteur</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/About" className="nav-link">About</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/Services" className="nav-link">Services</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/Contact" className="nav-link">Contact</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/Inscription" className="nav-link">Inscription</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/SeConnecter" className="nav-link">Se Connecter</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/RendezVous" className="nav-link">Rendez-vous</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/RechercherDocteur" className="nav-link">RechercherDocteur</Link>
-                    </li>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul className="dropdown-menu">
-                            <li><a className="dropdown-item" href="#">Action</a></li>
-                            <li><a className="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr className="dropdown-divider"/>
-                            </li>
-                            <li><a className="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+                <div className="navbar-header">
 
+                <h1 className="navbar-brand">MedHub</h1>
+                </div>
+                <ul className="nav nav-tabs">
+                    <li className="nav-item">
+                        <div className="dropdown">
+                            <p className="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                               data-toggle="dropdown">
+                                home
+                            </p>
+                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <Link to="/HomePatient" className="dropdown-item">HomePatient</Link>
+                                <Link to="/HomeDocteur" className="dropdown-item">HomeDocteur</Link>
+                            </div>
+                        </div>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/About" className="nav-link text-dark ">About</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/Services" className="nav-link text-dark ">Services</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/Contact" className="nav-link text-dark">Contact</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/RendezVous" className="nav-link text-dark">Rendez-vous</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/RechercherDocteur" className="nav-link text-dark">RechercherDocteur</Link>
+                    </li>
+                    <li className="nav-item">
+                        <div className="dropdown">
+                            <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown">
+                                <i className="fa-solid fa-bars"></i>
+                            </button>
+                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <Link to="/Admin" className="dropdown-item">AdminPanel</Link>
+                                <Link to="/Inscription" className="dropdown-item">Inscription</Link>
+                                <p className="dropdown-item">Pas terminé</p>
+                                <Link to="/SeConnecter" className="nav-link text-dark">Se Connecter</Link>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
