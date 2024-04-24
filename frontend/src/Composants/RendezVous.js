@@ -1,15 +1,21 @@
 import React from "react";
 import axios from "axios";
+import { useEffect } from "react";
 
 function RendezVous(){
 
   const baseURL = "http://localhost:5000/CreateReservation";
+  const getDocteur = "http://localhost:5000/docteur";
+
+  const [docteur, setDocteur] = React.useState([]);
+
     const reservationValues = {
         ramq: "",
         email: "",
         telephone:"",
         temps:"",
-        raison:""
+        raison:"",
+        idDoctor:""
     }
     const [reservation, setReservation] = React.useState(reservationValues);
     const[formErrors, setFormErrors] = React.useState({});
@@ -30,7 +36,7 @@ function RendezVous(){
       let regex = /^(?=^.{12}$)[A-Z]{4}\d*$/
       return regex.test(ramq);
   };
-  function DataValidation(inputValues) {
+  function DataValidation(inputValues,selectDoctor) {
       const errors ={
           value:"",
           ramq:"",
@@ -54,18 +60,24 @@ function RendezVous(){
           errors.success = "";
           errors.email = "Veuillez entrez un email valide";
       }
+      if(!selectDoctor || selectDoctor=="NoChoice" ){
+        errors.value="Veuillez selectionner un docteur";
+        errors.success="";
+    }
       return errors;
   }
   function handleSubmit(event){
       event.preventDefault();
-      setFormErrors(DataValidation(reservation));
+      setFormErrors(DataValidation(reservation,valueDoct));
       const userData = {
           ramq:reservation.ramq[0],
           email: reservation.email[0],
           telephone:reservation.telephone[0],
           temps:reservation.temps[0],
-          raison:reservation.raison[0]
+          raison:reservation.raison[0],
+          idDoctor:valueDoct
       }
+      console.log("userData:",userData);
       if(formErrors.ramq === "" && formErrors.email === "" && formErrors.value === ""){
           axios.post(baseURL, userData,{
               headers: {
@@ -76,6 +88,22 @@ function RendezVous(){
       }
   }
 
+
+  
+  const [valueDoct, setValueDoct] = React.useState("");
+
+
+  function handleChange2(event) {
+      setValueDoct(event.target.value);
+      console.log("ID doct:",event.target.value);
+  }
+  
+  
+  useEffect(() => {
+    axios.get(getDocteur)
+        .then(res => setDocteur(res.data))
+        .catch(err => console.log(err))
+}, [])
 
     return(
         <div className="hero">
@@ -107,6 +135,19 @@ function RendezVous(){
             Raison du rendez-vous: <br />
             <input onChange={handleChange} type="text" name="raison" />
           </div>
+
+            <div>
+                Docteur: <br />
+                <select onChange={handleChange2} name="selectionDocteurs">
+                <option value="NoChoice">Selectionner un docteur</option>    
+               {docteur.map((user)=>(
+                    <option key={user.user_id} value={user.user_id}>{user.firstname} {user.lastname}</option>
+
+               ))}    
+
+                </select> 
+            </div>
+
           <br></br>
           <p> <span className="text-danger">
                         {formErrors.value}<br/>

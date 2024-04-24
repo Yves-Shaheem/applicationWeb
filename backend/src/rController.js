@@ -23,7 +23,8 @@ router.get('/reservation',
             if(conn){
                 console.log("Connected to DB");
             }
-            const query = "Select * from reservation where status=1";
+            const query="select  reservation.reservation_id,reservation.email , reservation.ramq, docteur.email as doctorEmail, reservation.temps, reservation.raison from reservation join docteur ON reservation.id_doctor=docteur.user_id where reservation.status=1"
+         //   const query = "Select * from reservation where status=1";
             const rs = await conn.query(query);
             console.log(rs);
             return response.json(rs);
@@ -46,14 +47,15 @@ router.post('/CreateReservation',
         const te = request.body.telephone;
         const tp = request.body.temps;
         const rn = request.body.raison;
+        const idDoct=request.body.idDoctor;
         const st = true;
-        const values = [pe,rq,te,tp,rn,st];
+        const values = [pe,rq,te,tp,rn,idDoct,st];
         try {
             conn = await db.getConnection();
             if(conn){
                 console.log("Connected to DB");
             }
-            const query = "Insert into reservation(email,ramq,telephone,temps, raison, status) values(?,?,?,?,?,?)";
+            const query = "Insert into reservation(email,ramq,telephone,temps, raison,id_doctor, status) values(?,?,?,?,?,?,?)";
             const rs = await conn.prepare(query);
             await rs.execute(values);
             console.log(rs);

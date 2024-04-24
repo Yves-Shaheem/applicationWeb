@@ -38,21 +38,21 @@ router.get('/resultat',
         }
     });
 
-router.post('/CreateResultat',
-    async (request, response) => {
+router.post('/CreateResult',
+    async (req, response) => {
         let conn;
-        const pe = request.body.patientEmail;
-        const rq = request.body.ramq;
-        const de = request.body.doctorEmail;
-        const mess=request.body.message;
+        const rq = req.body.ramq;
+        const pe = req.body.patientEmail;
+        const de = req.body.doctorEmail;
+        const mess = req.body.message;
         const st = true;
-        const values = [pe,rq,de,mess,st];
+        const values = [rq,pe,de,mess,st];
         try {
             conn = await db.getConnection();
             if(conn){
                 console.log("Connected to DB");
             }
-            const query = "Insert into resultat(patientEmail,ramq,doctorEmail,message,status) values(?,?,?,?,?)";
+            const query = "Insert into resultat( ramq, patientEmail, doctorEmail, message, status) values(?,?,?,?,?)";
             const rs = await conn.prepare(query);
             await rs.execute(values);
             console.log(rs);
