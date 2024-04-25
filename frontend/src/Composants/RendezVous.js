@@ -106,64 +106,67 @@ function RendezVous(){
 }, [])
 
     return(
-        <div className="hero">
-            <div className="col-12">
-                <h1>Prendre rendez-vous</h1>
-                <form  onSubmit={handleSubmit}>
-                <div>
-            ramq: <br />
-            <input onChange={handleChange} type="text" name="ramq" maxLength={12} />
-          </div>
+        <div className="container w-100">
 
-          <div>
-            Email: <br />
-            <input onChange={handleChange} type="text" name="email" />
-          </div>
+            <h1 className="text-center">
+                Prendre rendez-vous
+            </h1>
+            <form onSubmit={handleSubmit} className="d-flex justify-content-center">
 
-          <div>
-            Numéro de téléphone: <br />
-            <input onChange={handleChange} type="text" name="telephone"/>
-          </div>
-          
-          <div>
-            Date : <br />
-            <input onChange={handleChange} type="date" name="temps" />
-          </div>
+                <div className="form-group row mt-3 w-50 justify-items-center">
+                    <label className="col-sm-2 col-form-label">RAMQ:</label>
+
+                    <input onChange={handleChange} type="text" name="ramq" maxLength={12} className="form-control "
+                           placeholder="CVCV21323419"/>
+                </div>
+
+                <div className="form-group row mt-3">
+                    <label className="col-sm-2 col-form-label">Email:</label>
+                    <input onChange={handleChange} type="email" name="email" className="form-control w-50"
+                           placeholder="noname@noname.co"/>
+                </div>
+
+                <div className="form-group row mt-3">
+                    <label className="col-sm-2 col-form-label">Téléphone:</label>
+                    <input onChange={handleChange} type="" name="telephone" className="form-control w-50"/>
+                </div>
+
+                <div className="form-group row mt-3">
+                    <label className="col-sm-2 col-form-label">Date:</label>
+                    <input onChange={handleChange} type="date" name="temps" className="form-control w-50"/>
+                </div>
 
 
-          <div>
-            Raison du rendez-vous: <br />
-            <input onChange={handleChange} type="text" name="raison" />
-          </div>
+                <div className="form-group row mt-3">
+                    <label className="col-sm-2 col-form-label">Raison:</label>
+                    <input onChange={handleChange} type="text" name="raison" className="form-control w-50"/>
+                </div>
 
-            <div>
-                Docteur: <br />
-                <select onChange={handleChange2} name="selectionDocteurs">
-                <option value="NoChoice">Selectionner un docteur</option>    
-               {docteur.map((user)=>(
-                    <option key={user.user_id} value={user.user_id}>{user.firstname} {user.lastname}</option>
+                <div className="form-group row mt-3">
+                    <label className="col-sm-2 col-form-label">Docteur: </label>
+                    <select onChange={handleChange2} name="selectionDocteurs" className="form-control w-50">
+                        <option value="NoChoice"> Sélectionner un docteur</option>
+                        {docteur.map((user) => (
+                            <option key={user.user_id}
+                                    value={user.user_id}>{user.firstname} {user.lastname}</option>
 
-               ))}    
+                        ))}
 
-                </select> 
-            </div>
-
-          <br></br>
-          <p> <span className="text-danger">
+                    </select>
+                </div>
+                <button onClick={handleSubmit} type="button" className="btn btn-danger mt-3">Réserver</button>
+                <div className="mt-3"> <span className="text-danger">
                         {formErrors.value}<br/>
-                        {formErrors.ramq}<br/>
-                        {formErrors.email}<br/>
+                    {formErrors.ramq}<br/>
+                    {formErrors.email}<br/>
                                         </span>
-                        <span className="text-success">{formErrors.success}</span><br/>
-                    </p>
-          <button onClick={handleSubmit} type="button" className="btn btn-danger">Réserver</button>
+                    <span className="text-success">{formErrors.success}</span><br/>
+                </div>
             </form>
-            </div>
 
 
         </div>
-        
-
     )
 }
+
 export default RendezVous;

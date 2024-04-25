@@ -44,12 +44,12 @@ function NavBar(){
                                     data-toggle="dropdown">
                                 <i className="fa-solid fa-bars"></i>
                             </button>
-                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuButton">
                                 <Link to="/Admin" className="dropdown-item">AdminPanel</Link>
                                 <Link to="/Inscription" className="dropdown-item">Inscription</Link>
                                 <p className="dropdown-item">Pas terminé</p>
                                 <Link to="/SeConnecter" className="nav-link text-dark">Se Connecter</Link>
-                            </div>
+                            </ul>
                         </div>
                     </li>
                 </ul>
