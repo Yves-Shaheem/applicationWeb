@@ -17,6 +17,7 @@ import Faq from "./Composants/Faq";
 import HomeDocteur from "./Composants/HomeDocteur";
 import OublieMotDePasse from "./Composants/OublieMotDePasse";
 import RechercherDocteur from './Composants/RechercherDocteur';
+import InscriptionDocteur from './Composants/InscriptionDocteur';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path='/HomeDocteur' element={<HomeDocteur/>}/>
           <Route path='/OublieMotDePasse' element={<OublieMotDePasse/>} />
           <Route path='/RechercherDocteur' element={<RechercherDocteur/>} />
+          <Route path='/InscriptionDocteur' element={<InscriptionDocteur/>} />
 
         </Routes>
       </div>

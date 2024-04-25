@@ -38,19 +38,20 @@ router.get('/docteur',
 router.post('/CreateDocteur',
     async (request, response) => {
         let conn;
-        const fn = request.query.firstname;
-        const ln = request.query.lastname;
-        const sp = request.query.specialite;
-        const lc = request.query.licence;
-        const el = request.query.email;
+        const fn = request.body.firstname;
+        const ln = request.body.lastname;
+        const sp = request.body.specialite;
+        const lc = request.body.licence;
+        const el = request.body.email;
+        const pw = request.body.password;
         const st = true;
-        const values = [fn, ln, sp,lc,el,st];
+        const values = [fn, ln, sp,lc,el,pw,st];
         try {
             conn = await db.getConnection();
             if(conn){
                 console.log("Connected to DB");
             }
-            const query = "Insert into docteur(firstname, lastname, specialite,licence,email,status) values(?,?,?,?,?,?)";
+            const query = "Insert into docteur(firstname, lastname, specialite,licence,email,password,status) values(?,?,?,?,?,?,?)";
             const rs = await conn.prepare(query);
             await rs.execute(values);
             console.log(rs);
