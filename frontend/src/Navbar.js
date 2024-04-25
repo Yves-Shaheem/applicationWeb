@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 function NavBar(){
     return(
-        <nav className="navbar navbar-default ">
+        <nav className="navbar navbar-default bg-light">
             <div className="container-fluid">
                 <div className="navbar-header">
 
