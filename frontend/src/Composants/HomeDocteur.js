@@ -7,7 +7,8 @@ function HomeDocteur (){
     const baseURL = "http://localhost:5000/reservation";
     const baseURL2="http://localhost:5000/UpdateReservation";
     const baseURL3="http://localhost:5000/UpdateReservationTime";
-    const baseURL4="http://localhost:5000/CreateResultat";
+    const baseURL4="http://localhost:5000/CreateResult";
+
     const [reservation, setReservation] = React.useState([]);
     const [newTemps,setNewTemps]=React.useState("");
 
@@ -43,17 +44,25 @@ function HomeDocteur (){
             ramq:"",
             patientEmail:"",
             doctorEmail:"",
-            message:""
+            message:"",
+            success: "Votre resultat a été créer"
         };
         console.log(inputValues);
-        if(!inputValues.ramq[0] || !inputValues.PatientEmail[0] || !inputValues.doctorEmail[0] || !inputValues.message[0]) {
+        if(!inputValues.ramq[0] || !inputValues.patientEmail[0] || !inputValues.doctorEmail[0] || !inputValues.message[0]) {
             errors.value = "Aucun champ ne doit etre vide ! ";}
 
-        if(!isValidR(inputValues.ramq[0])) errors.ramq = "Veuillez rentrer l'information comme telle 'XXXX00000000' ";
-
-        if(!isValidE(inputValues.PatientEmail[0])) errors.email = "Veuillez entrez un email patient valide";
-
-        if(!isValidE(inputValues.doctorEmail[0])) errors.email = "Veuillez entrez un email docteur valide";
+        if(!isValidR(inputValues.ramq[0])) {
+            errors.success="";
+            errors.ramq = "Veuillez rentrer l'information comme telle 'XXXX00000000' ";
+        }
+        if(!isValidE(inputValues.patientEmail[0])) {
+            errors.success="";
+            errors.patientEmail = "Veuillez entrez un email patient valide";
+        }
+        if(!isValidE(inputValues.doctorEmail[0])) {
+            errors.success="";
+            errors.doctorEmail = "Veuillez entrez un email docteur valide";
+        }
 
         return errors;
     }
@@ -69,7 +78,6 @@ function HomeDocteur (){
         }
 
         if(formErrors.ramq === "" && formErrors.patientEmail === "" && formErrors.doctorEmail === "" && formErrors.value === ""){
-            <span>Votre formulaire est envoyé</span>
             axios.post(baseURL4, userData,{
                 headers: {
                     'Content-Type': 'application/json'
@@ -147,7 +155,7 @@ const postData=(id)=>{
                             <tr key={resv.reservation_id}>
  
                                 <td>{resv.reservation_id}</td>
-                                <td>{resv.patientEmail}</td>
+                                <td>{resv.email}</td>
                                 <td>{resv.ramq}</td>
                                 <td>{resv.doctorEmail}</td>
                                 <td>{resv.temps}</td>
@@ -165,7 +173,7 @@ const postData=(id)=>{
                                                     </div>
                                                     <form >
                                                     <div>New temps:
-                                                        <input type="text" value={newTemps} onChange={handleChange} name="newTemps"></input>
+                                                        <input type="date" value={newTemps} onChange={handleChange} name="newTemps"></input>
                                                     </div>
                                                     <br></br>
                                                     <div>
@@ -195,15 +203,16 @@ const postData=(id)=>{
             <div className="col-12">
 
             <h3>Soumissions des résultats</h3>
-            <form >
+            <form onSubmit={handleSubmit} >
+
+            <div>
+            RAMQ: <br />
+            <input type="text" name="ramq" maxLength={12} onChange={handleChange2} />
+          </div>
+          
             <div>
             PatientEmail: <br />
             <input type="text" name="patientEmail" onChange={handleChange2}/>
-          </div>
-
-          <div>
-            RAMQ: <br />
-            <input type="text" name="ramq" maxLength={12} onChange={handleChange2} />
           </div>
 
           <div>
@@ -217,6 +226,16 @@ const postData=(id)=>{
           </div>
 
           <br></br>
+
+          <p>
+                        <span className="text-danger">
+                            {formErrors.ramq}<br />
+                            {formErrors.patientEmail}<br />
+                            {formErrors.doctorEmail}<br />
+                            {formErrors.value}<br />
+                        </span>
+                        <span className="text-success">{formErrors.success}</span><br />
+                    </p>
 
           <button onClick={handleSubmit} type="button" className="btn btn-primary">Envoyer le formulaire</button>
 

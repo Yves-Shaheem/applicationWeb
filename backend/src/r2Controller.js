@@ -15,7 +15,7 @@ const db = mariadb.createPool({
 });
 
 
-router.get('/reservation',
+router.get('/resultat',
     async (request, response) => {
         let conn;
         try {
@@ -23,8 +23,7 @@ router.get('/reservation',
             if(conn){
                 console.log("Connected to DB");
             }
-            const query="select  reservation.reservation_id,reservation.email , reservation.ramq, docteur.email as doctorEmail, reservation.temps, reservation.raison from reservation join docteur ON reservation.id_doctor=docteur.user_id where reservation.status=1"
-         //   const query = "Select * from reservation where status=1";
+            const query = "Select * from resultat where status=1";
             const rs = await conn.query(query);
             console.log(rs);
             return response.json(rs);
@@ -39,23 +38,21 @@ router.get('/reservation',
         }
     });
 
-router.post('/CreateReservation',
-    async (request, response) => {
+router.post('/CreateResult',
+    async (req, response) => {
         let conn;
-        const pe = request.body.email;
-        const rq = request.body.ramq;
-        const te = request.body.telephone;
-        const tp = request.body.temps;
-        const rn = request.body.raison;
-        const idDoct=request.body.idDoctor;
+        const rq = req.body.ramq;
+        const pe = req.body.patientEmail;
+        const de = req.body.doctorEmail;
+        const mess = req.body.message;
         const st = true;
-        const values = [pe,rq,te,tp,rn,idDoct,st];
+        const values = [rq,pe,de,mess,st];
         try {
             conn = await db.getConnection();
             if(conn){
                 console.log("Connected to DB");
             }
-            const query = "Insert into reservation(email,ramq,telephone,temps, raison,id_doctor, status) values(?,?,?,?,?,?,?)";
+            const query = "Insert into resultat( ramq, patientEmail, doctorEmail, message, status) values(?,?,?,?,?)";
             const rs = await conn.prepare(query);
             await rs.execute(values);
             console.log(rs);
@@ -71,19 +68,19 @@ router.post('/CreateReservation',
         }
     });
 
-router.put('/UpdateReservation',
+router.put('/UpdateResultat',
     async (request, response) => {
         let conn;
         const index = request.body.index;
         const status = request.body.status;
+
         const values = [status,index];
-
         try {
             conn = await db.getConnection();
             if(conn){
                 console.log("Connected to DB");
             }
-            const reservation = "Update reservation Set status= ? where reservation_id= ?";
+            const reservation = "Update resultat Set status= ? where reservation_id= ?";
             const rs = await conn.prepare(reservation);
             await rs.execute(values);
             console.log(rs);
@@ -100,34 +97,5 @@ router.put('/UpdateReservation',
         }
     });
 
-    router.put('/UpdateReservationTime',
-    async (request, response) => {
-        let conn;
-        const index = request.body.index;
-        const temps=request.body.temps;
-      
-
-        const values = [temps,index];
-        try {
-            conn = await db.getConnection();
-            if(conn){
-                console.log("Connected to DB");
-            }
-            const reservation = "Update reservation Set temps=? where reservation_id=?";
-            const rs = await conn.prepare(reservation);
-            await rs.execute(values);
-            console.log(rs);
-            response.send("OK");
-            //return response.json(rs);
-        }
-        catch (error) {
-            console.log(error);
-        } finally {
-            if (conn) {
-                conn.end;
-            }
-            // Ultra important pour éviter les injections SQL
-        }
-    });
 
 export default router;

@@ -4,7 +4,7 @@ import cors from "cors";
 import patientRoute from  "./pController.js";
 import docteurRoute from "./dController.js";
 import reservationRoute from "./rController.js";
-import resultatRoute from "./resultatController.js";
+import resultatRoute from "./r2Controller.js"
 
 
 const app = express();

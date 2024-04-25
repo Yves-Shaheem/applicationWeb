@@ -77,7 +77,7 @@ const postData=(id)=>{
                             <tr key={resv.reservation_id}>
  
                                 <td>{resv.reservation_id}</td>
-                                <td>{resv.patientEmail}</td>
+                                <td>{resv.email}</td>
                                 <td>{resv.ramq}</td>
                                 <td>{resv.doctorEmail}</td>
                                 <td>{resv.temps}</td>
