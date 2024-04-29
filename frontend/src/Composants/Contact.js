@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 function Contact() {
     return(
-        <div className="container text-center ">
-            <div>
+        <div className="container text-center p-2 ">
+            <div className="justify-content-center border border-dark-subtle p-3 rounded bg-body-tertiary">
                 <div className="mt-5">
                     <h1>Page Contact</h1>
                     <h4>Contactez-nous si vous avez des questions. Nous sommes disponibles toute la semaine.</h4>

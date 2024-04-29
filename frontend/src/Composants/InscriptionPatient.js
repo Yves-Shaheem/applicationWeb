@@ -86,49 +86,60 @@ function InscriptionPatient(){
     * */
 
     return(
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        Prénom: <span style={{color: "red"}}>*</span><br/>
-                        <input onChange={handleChange} type="text" name="firstname"/>
-                    </div>
+        <form onSubmit={handleSubmit}
+              className="justify-content-center border border-dark-subtle p-3 rounded bg-body-tertiary">
+            <h1 className="text-center"> Inscription Client </h1>
 
-                    <div>
-                        Nom: <span style={{color: "red"}}>*</span><br/>
-                        <input onChange={handleChange} type="text" name="lastname"/>
-                    </div>
+            <div className="mt-3 ">
+                Prénom: <span style={{color: "red"}}>*</span><br/>
+                <input onChange={handleChange} type="text" name="firstname" className="form-control"/>
+            </div>
 
-                    <div>
-                        RAMQ: <span style={{color: "red"}}>*</span><br/>
-                        <input onChange={handleChange} type="text" name="ramq" maxLength={12}/>
-                    </div>
-                    <div>
-                        Email: <span style={{color: "red"}}>*</span> <br/>
-                        <input onChange={handleChange} type="text" name="email"/>
-                    </div>
+            <div className="mt-3 ">
+                Nom: <span style={{color: "red"}}>*</span><br/>
+                <input onChange={handleChange} type="text" name="lastname" className="form-control"/>
+            </div>
 
-                    <div>
-                        Password: <span style={{color: "red"}}>*</span><br/>
-                        <input onChange={handleChange} type="password" name="password"/>
-                    </div>
-                    <br></br>
-                    <input type="checkbox" name="TermsOfUse" onChange={() => {
-                        setChecked(!checked);
-                    }} value={checked}/> &nbsp;
-                    <Link to="/TermsOfUse">Accept terms of use.</Link>
-                    <br/>
+            <div className="mt-3 ">
+                <label className="col-sm-2 col-form-label">RAMQ:
+                    <span style={{color: "red"}}>*</span><br/>
+                </label>
+                <input onChange={handleChange} type="text" name="ramq" maxLength={12} className="form-control"/>
+            </div>
+            <div className="mt-3 ">
+                Email: <span style={{color: "red"}}>*</span> <br/>
+                <input onChange={handleChange} type="text" name="email" className="form-control"/>
+            </div>
 
-                    <p> <span className="text-danger">
-                        {formErrors.termsOfUse}<br/>
-                        {formErrors.value}<br/>
-                        {formErrors.ramq}<br/>
-                        {formErrors.email}<br/>
-                                        </span>
-                        <span className="text-success">{formErrors.success}</span><br/>
-                    </p>
-                    <button onClick={handleSubmit} type="button" className="btn btn-primary">
-                        Inscrivez-vous
-                    </button>
-                </form>
+            <div className="mt-3 ">
+                Password: <span style={{color: "red"}}>*</span><br/>
+                <input onChange={handleChange} type="password" name="password" className="form-control"/>
+            </div>
+            <br></br>
+            <div className="mt-3 text-center">
+                <input type="checkbox" name="TermsOfUse" onChange={() => {
+                    setChecked(!checked);
+                }} value={checked}/> &nbsp;
+                <Link to="/TermsOfUse">Accept terms of use.</Link>
+            </div>
+            <div className="mt-3 text-center">
+                <button onClick={handleSubmit} type="button" className="btn btn-primary">
+                    Inscrivez-vous
+                </button>
+            </div>
+
+            <p> <span className="text-danger">
+                <p className="mt-1">{formErrors.termsOfUse}</p>
+                <p className="mt-1">{formErrors.termsOfUse}</p>
+                <p className="mt-1">{formErrors.value}</p>
+                <p className="mt-1">{formErrors.ramq}</p>
+                <p className="mt-1">{formErrors.email}</p>
+                </span>
+                <span className="text-success">{formErrors.success}</span>
+            </p>
+
+
+        </form>
     )
 }
 

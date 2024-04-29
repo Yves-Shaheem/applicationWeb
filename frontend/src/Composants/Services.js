@@ -1,7 +1,7 @@
 function Services() {
     return(
-        <div className="hero">
-            <div className="container">
+        <div className="container p-2">
+            <div className="border border-dark-subtle p-2 rounded bg-body-tertiary">
                 <div className="pt-1">
                  <div className="entete">  
                 <h1>Nos services médicaux</h1>
@@ -49,8 +49,10 @@ function Services() {
                         </tr>
                     </tbody>
                 </table>
-                <h4>⚠ Si vous avez des douleurs assez graves qui ne se retrouvent pas dans le tableau, veuillez nous contacter. ⚠</h4>
-                <h5>Tableau mit à jour</h5>
+                <div className="text-center">
+                    <h4>⚠ Si vous avez des douleurs assez graves et elle ne se retrouvent pas dans le tableau, veuillez nous contacter. ⚠</h4>
+                    <h5>Le tableau sera mis à jour !</h5>
+                </div>
             </div>
         </div>
     )
