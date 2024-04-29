@@ -133,9 +133,11 @@ const postData=(id)=>{
 
     return (
         <div className="container">
-        <div className="hero col-6">
-            <div>
+        <div className="row">
+        <div className="text-center">
                 <h1>Page HomeDocteur</h1>
+                </div>
+                <div className="col-6 border border-dark-subtle bg-body-tertiary p-3">
                 <table className="table table-striped">
                     <thead>
                     <h3>Liste des reservations</h3>
@@ -199,31 +201,35 @@ const postData=(id)=>{
                 </table>
  
             </div>
-            
-            <div className="col-12">
 
+            <div className="col-6 border border-dark-subtle bg-body-tertiary p-3">
+           <div className="text-center">
             <h3>Soumissions des résultats</h3>
+            </div>
             <form onSubmit={handleSubmit} >
 
-            <div>
-            RAMQ: <br />
-            <input type="text" name="ramq" maxLength={12} onChange={handleChange2} />
+            <div className="mt-3">
+            <label className="col-form-label">RAMQ:</label>
+            <input type="text" name="ramq" maxLength={12} onChange={handleChange2} className="form-control" />
           </div>
           
             <div>
-            PatientEmail: <br />
-            <input type="text" name="patientEmail" onChange={handleChange2}/>
+            <label className="col-form-label">PatientEmail:</label>
+            <input type="text" name="patientEmail" onChange={handleChange2} className="form-control"/>
           </div>
 
           <div>
-            DocteurEmail: <br />
-            <input type="text" name="doctorEmail" onChange={handleChange2}/>
+          <label className="col-form-label">DocteurEmail:</label>
+            <input type="text" name="doctorEmail" onChange={handleChange2} className="form-control"/>
           </div>
 
           <div>
-            Message: <br />
-            <textarea type="text" name="message" rows="4" cols="50" onChange={handleChange2} />
+          <label className="col-form-label">Message:</label>
+            <textarea type="text" name="message" rows="5" cols="50" onChange={handleChange2} className="form-control"/>
           </div>
+
+          
+          <button onClick={handleSubmit} type="button" className="btn btn-primary mt-3">Envoyer le formulaire</button>
 
           <br></br>
 
@@ -237,15 +243,13 @@ const postData=(id)=>{
                         <span className="text-success">{formErrors.success}</span><br />
                     </p>
 
-          <button onClick={handleSubmit} type="button" className="btn btn-primary">Envoyer le formulaire</button>
-
-
             </form>
             
 
             </div>
 
             </div>
+            
         </div>
         
     );

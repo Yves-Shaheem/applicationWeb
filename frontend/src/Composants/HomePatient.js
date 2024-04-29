@@ -49,8 +49,9 @@ const postData=(id)=>{
     return (
 
         <div className="container">
+            <div className="row">
             <div className="text-center"><h1>Page HomePatient</h1></div>
-            <div className="d-flex justify-content-center p-2 bg-light-subtle">
+            <div className="col-6 p-2 bg-light-subtle">
                 <div>
                 <table className="table table-striped border border-dark-subtle p-3 rounded bg-body-tertiary">
                     <thead>
@@ -88,8 +89,8 @@ const postData=(id)=>{
                 </table>
                 </div>
             </div>
-            <div>
-                <div>
+
+            <div className="col-6 p-2 bg-light-subtle">
                 <table className="table border border-dark-subtle p-3 rounded bg-body-tertiary">
                     <thead>
                     <h3>Réception des résultats</h3>
@@ -143,8 +144,8 @@ const postData=(id)=>{
                 </table>
                 </div>
             </div>
-        </div>
-
+            </div>
+       
 
     );
 }
