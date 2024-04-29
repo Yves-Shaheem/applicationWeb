@@ -23,6 +23,8 @@ router.get('/reservation',
             if(conn){
                 console.log("Connected to DB");
             }
+
+            //SELECT r.ramq, r.telephone, d.email FROM reservation AS r, docteur AS d WHERE r.id_doctor = d.user_id, r.status = 1;
             const query="select  reservation.reservation_id,reservation.email , reservation.ramq, docteur.email as doctorEmail, reservation.temps, reservation.raison from reservation join docteur ON reservation.id_doctor=docteur.user_id where reservation.status=1"
          //   const query = "Select * from reservation where status=1";
             const rs = await conn.query(query);
