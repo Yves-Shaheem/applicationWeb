@@ -106,45 +106,46 @@ function RendezVous(){
 }, [])
 
     return(
-        <div className="container w-100">
+        <div className="d-flex justify-content-center p-2 bg-light-subtle">
 
-            <h1 className="text-center">
-                Prendre rendez-vous
-            </h1>
-            <form onSubmit={handleSubmit} className="d-flex justify-content-center">
 
-                <div className="form-group row mt-3 w-50 justify-items-center">
+            <form onSubmit={handleSubmit}
+                  className="justify-content-center border border-dark-subtle p-3 rounded bg-body-tertiary">
+
+                <h1 className="text-center"> Prendre rendez-vous </h1>
+
+                <div className="mt-3 ">
                     <label className="col-sm-2 col-form-label">RAMQ:</label>
 
-                    <input onChange={handleChange} type="text" name="ramq" maxLength={12} className="form-control "
-                           placeholder="CVCV21323419"/>
+                    <input onChange={handleChange} type="text" name="ramq" maxLength={12} className="form-control"
+                           placeholder="EX: CVCV21323419"/>
                 </div>
 
-                <div className="form-group row mt-3">
-                    <label className="col-sm-2 col-form-label">Email:</label>
-                    <input onChange={handleChange} type="email" name="email" className="form-control w-50"
+                <div className="mt-3">
+                    <label className="form-label">Email:</label>
+                    <input onChange={handleChange} type="email" name="email" className="form-control "
                            placeholder="noname@noname.co"/>
                 </div>
 
-                <div className="form-group row mt-3">
-                    <label className="col-sm-2 col-form-label">Téléphone:</label>
-                    <input onChange={handleChange} type="" name="telephone" className="form-control w-50"/>
+                <div className="mt-3">
+                    <label className="form-label">Téléphone:</label>
+                    <input onChange={handleChange} type="" name="telephone" className="form-control "/>
                 </div>
 
-                <div className="form-group row mt-3">
-                    <label className="col-sm-2 col-form-label">Date:</label>
-                    <input onChange={handleChange} type="date" name="temps" className="form-control w-50"/>
+                <div className="mt-3">
+                    <label className="form-label">Date:</label>
+                    <input onChange={handleChange} type="date" name="temps" className="form-control "/>
                 </div>
 
 
-                <div className="form-group row mt-3">
-                    <label className="col-sm-2 col-form-label">Raison:</label>
-                    <input onChange={handleChange} type="text" name="raison" className="form-control w-50"/>
+                <div className="mt-3">
+                    <label className="form-label">Raison:</label>
+                    <input onChange={handleChange} type="text" name="raison" className="form-control "/>
                 </div>
 
-                <div className="form-group row mt-3">
-                    <label className="col-sm-2 col-form-label">Docteur: </label>
-                    <select onChange={handleChange2} name="selectionDocteurs" className="form-control w-50">
+                <div className="mt-3">
+                    <label className="form-label">Docteur: </label>
+                    <select onChange={handleChange2} name="selectionDocteurs" className="form-control ">
                         <option value="NoChoice"> Sélectionner un docteur</option>
                         {docteur.map((user) => (
                             <option key={user.user_id}
@@ -154,8 +155,10 @@ function RendezVous(){
 
                     </select>
                 </div>
-                <button onClick={handleSubmit} type="button" className="btn btn-danger mt-3">Réserver</button>
-                <div className="mt-3"> <span className="text-danger">
+                <div className="text-center mt-3">
+                <button onClick={handleSubmit} type="button" className="btn btn-danger mt-3 justify-item-center">Réserver</button>
+                </div>
+                    <div className="mt-3"> <span className="text-danger">
                         {formErrors.value}<br/>
                     {formErrors.ramq}<br/>
                     {formErrors.email}<br/>
