@@ -2,8 +2,13 @@
 
 import { Link } from "react-router-dom"
 
+/*
+    * @author Yanni, Jimmy Shaheem
+    *
+    * */
 function NavBar(){
     return(
+        
         <nav className="navbar navbar-default bg-light">
             <div className="container-fluid">
                 <div className="navbar-header">
@@ -18,7 +23,7 @@ function NavBar(){
                                 home
                             </p>
                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <Link to="/HomePatient" className="dropdown-item">HomePatient</Link>
+                                <Link to="/" className="dropdown-item">HomePatient</Link>
                                 <Link to="/HomeDocteur" className="dropdown-item">HomeDocteur</Link>
                             </div>
                         </div>
@@ -55,8 +60,6 @@ function NavBar(){
                 </ul>
             </div>
         </nav>
-
-
     );
 }
 

@@ -9,6 +9,11 @@ app.use(cors());
 
 const db = database;
 
+/*
+    * @author Shaheem et Jimmy Nguyen
+    *
+    * */
+
 
 router.get('/docteur',
     async (request, response) => {
@@ -123,59 +128,6 @@ router.put('/DeleteDoctor',
             // Ultra important pour éviter les injections SQL
         }
     });
-router.get('/resultat',
-    async (request, response) => {
-        let conn;
-        try {
-            conn = await db.getConnection();
-            if(conn){
-                console.log("Connected to DB");
-            }
-            const query = "Select * from resultat where status=true";
-            const rs = await conn.query(query);
-            console.log(rs);
-            return response.json(rs);
-        }
-        catch (error) {
-            console.log(error);
-        } finally {
-            if (conn) {
-                conn.end;
-            }
-            // Ultra important pour éviter les injections SQL
-        }
-    });
 
-
-
-router.post('/CreateResultat',
-    async (request, response) => {
-        let conn;
-        const rq = request.body.ramq;
-        const pe = request.bodybody.patientEmail;
-        const de = request.query.docteurEmail;
-        const ms = request.query.message;
-        const st = true;
-        const values = [rq, pe, de,ms,st];
-        try {
-            conn = await db.getConnection();
-            if(conn){
-                console.log("Connected to DB");
-            }
-            const query = "Insert into resultat(ramq, patientEmail, doctorEmail,message,status) values(?,?,?,?,?)";
-            const rs = await conn.prepare(query);
-            await rs.execute(values);
-            console.log(rs);
-            return response.json(rs);
-        }
-        catch (error) {
-            console.log(error);
-        } finally {
-            if (conn) {
-                conn.end;
-            }
-            // Ultra important pour éviter les injections SQL
-        }
-    });
 
 export default router;

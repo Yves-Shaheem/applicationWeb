@@ -1,3 +1,9 @@
+/**
+@author Shaheem Jimmy Yanni
+**/
+
+
+
 DROP DATABASE IF EXISTS projet;
 CREATE DATABASE projet;
 

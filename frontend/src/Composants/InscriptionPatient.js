@@ -81,9 +81,6 @@ function InscriptionPatient(){
         }
     }
 
-    /*
-    * author Shaheem Yanni
-    * */
 
     return(
         <form onSubmit={handleSubmit}

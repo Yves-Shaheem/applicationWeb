@@ -1,4 +1,14 @@
+/**
+ * 
+ * @author Yanni Shaheem  
+ * 
+ * 
+ */
+
+
 function About() {
+    
+
     return(
         <div className="container p-3 text-center">
 

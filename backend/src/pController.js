@@ -1,18 +1,19 @@
 import express from "express";
 import mariadb from "mariadb";
 import cors from "cors";
+import database from "./properties.js";
 
 const app = express();
 const router =express.Router();
 app.use(cors());
 
-const db = mariadb.createPool({
-    host: "127.0.0.1",
-    port: "3306",
-    user: "root",
-    password: "",
-    database: "projet"
-});
+const db = database;
+
+
+/*
+    * @author Shaheem et Jimmy Nguyen
+    *
+    * */
 
 
 // async => syncronisation
@@ -51,13 +52,6 @@ router.post('/CreatePatient',
         const el = req.body.email;
         const pass = req.body.pass;
 
-        //Pour tester les autres pages qui avaient besoin des donners
-/*
-        const fn = req.query.firstname;
-        const ln = req.query.lastname;
-        const rq = req.query.ramq;
-        const el = req.query.email;
-*/
 
         const st = true;
         const values = [fn, ln, rq,el,pass,st];

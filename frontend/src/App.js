@@ -18,6 +18,10 @@ import RechercherDocteur from './Composants/RechercherDocteur';
 import InscriptionDocteur from './Composants/InscriptionDocteur';
 
 function App() {
+  /*
+    * @author Shaheem,Yanni et Jimmy
+    *
+    * */
   return (
     <>
    <BrowserRouter>
@@ -32,7 +36,7 @@ function App() {
           <Route path="/SeConnecter" element={<SeConnecter/>} />
           <Route path="/RendezVous" element={<RendezVous/>} />
           <Route path="/TermsOfUse" element={<TermsOfUse/>} />
-          <Route path='/HomePatient' element={<HomePatient/>} />
+          <Route path='/' element={<HomePatient/>} />
           <Route path='/Admin' element={<AdminPanel/>} />
           <Route path='/Faq' element={<Faq/>} />
           <Route path='/HomeDocteur' element={<HomeDocteur/>}/>

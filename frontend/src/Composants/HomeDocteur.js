@@ -3,6 +3,11 @@ import React, {useEffect} from "react";
 import Popup from 'reactjs-popup';
  
 function HomeDocteur (){
+    /*
+    * @author Jimmy Nguyen
+    *
+    * */
+ 
  
     const baseURL = "http://localhost:5000/reservation";
     const baseURL2="http://localhost:5000/UpdateReservation";
@@ -133,11 +138,11 @@ const postData=(id)=>{
 
     return (
         <div className="container">
-        <div className="row">
-        <div className="text-center">
-                <h1>Page HomeDocteur</h1>
+        <div className="row m-3">
+                <div className="text-center m-2">
+                    <h1>Page HomeDocteur</h1>
                 </div>
-                <div className="col-6 border border-dark-subtle bg-body-tertiary p-3">
+                <div className="col-6 border border-dark-subtle bg-body-tertiary p-3 ">
                 <table className="table table-striped">
                     <thead>
                     <h3>Liste des reservations</h3>

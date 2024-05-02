@@ -3,6 +3,10 @@ import PatientCrud from "./PatientCrud";
 import DocteurCrud from "./DocteurCrud";
 
 
+/*
+    * @author Shaheem
+    *
+    * */
 
 function AdminPanel() {
     return (

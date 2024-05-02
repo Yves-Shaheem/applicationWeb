@@ -6,6 +6,10 @@ import InscriptionDocteur from "./InscriptionDocteur";
 
 
 function Inscription(){
+    /*
+    * @author Shaheem
+    *
+    * */
     const [form, setForm] = React.useState(false);
 
      const handleClick = () => {

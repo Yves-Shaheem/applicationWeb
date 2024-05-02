@@ -1,5 +1,11 @@
 import React from "react";
 
+/*
+* 
+@author Yanni et Jimmy
+* 
+*/
+
 function Footer2(){
     return(
         <div className=" text-center py-3 bg-light">© 2024 Copyright Cégep Marie-Victorin: MedHub

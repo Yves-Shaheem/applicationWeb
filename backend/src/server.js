@@ -6,6 +6,10 @@ import docteurRoute from "./dController.js";
 import reservationRoute from "./rController.js";
 import resultatRoute from "./r2Controller.js"
 
+/*
+    * @author Jimmy Nguyen
+    *
+    * */
 
 const app = express();
 app.use(express.json());

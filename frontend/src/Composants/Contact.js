@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom"
 function Contact() {
+    /*
+    * @author Yanni
+    *
+    * */
+
     return(
         <div className="container text-center p-2 ">
             <div className="justify-content-center border border-dark-subtle p-3 rounded bg-body-tertiary">
