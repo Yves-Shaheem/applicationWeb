@@ -18,3 +18,6 @@ API :
 - https://www.npmjs.com 
 
 - https://fr.legacy.reactjs.org/docs/getting-started.html 
+
+Install librairies:
+  -npm i reactjs-popup
