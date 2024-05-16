@@ -16,18 +16,14 @@ const db = database;
     * */
 
 
-// async => syncronisation
+
 router.get('/patient',
     async (request, response) => {
         let conn;
         try {
             conn = await db.getConnection();
-            if(conn){
-                console.log("Connected to DB");
-            }
             const toto = "Select * from patient where status=1";
             const rs = await conn.query(toto);
-            console.log(rs);
             return response.json(rs);
         }
         catch (error) {
@@ -36,7 +32,7 @@ router.get('/patient',
             if (conn) {
                 conn.end;
             }
-            // Ultra important pour éviter les injections SQL
+            
         }
     });
 
@@ -57,13 +53,9 @@ router.post('/CreatePatient',
         const values = [fn, ln, rq,el,pass,st];
         try {
             conn = await db.getConnection();
-            if(conn){
-                console.log("Connected to DB");
-            }
             const query = "Insert into patient(firstname, lastname, ramq,email,password,status) values(?,?,?,?,?,?)";
             const rs = await conn.prepare(query);
             await rs.execute(values);
-            console.log(rs);
             return response.json(rs);
         }
         catch (error) {
@@ -72,7 +64,7 @@ router.post('/CreatePatient',
             if (conn) {
                 conn.end;
             }
-            // Ultra important pour éviter les injections SQL
+            
         }
     });
 
@@ -85,15 +77,10 @@ router.put('/UpdatePatient',
         const values = [fn,index];
         try {
             conn = await db.getConnection();
-            if(conn){
-                console.log("Connected to DB");
-            }
             const patient = "Update patient Set firstname= ? where patient_id= ?";
             const rs = await conn.prepare(patient);
             await rs.execute(values);
-            console.log(rs);
             response.send("OK");
-            //return response.json(rs);
         }
         catch (error) {
             console.log(error);
@@ -101,7 +88,7 @@ router.put('/UpdatePatient',
             if (conn) {
                 conn.end;
             }
-            // Ultra important pour éviter les injections SQL
+            
         }
     });
 router.put('/DeletePatient',
@@ -112,15 +99,11 @@ router.put('/DeletePatient',
         const values = [status,index];
         try {
             conn = await db.getConnection();
-            if(conn){
-                console.log("Connected to DB");
-            }
             const patient = "Update patient Set status= ? where user_id= ?";
             const rs = await conn.prepare(patient);
             await rs.execute(values);
-            console.log(rs);
             response.send("OK");
-            //return response.json(rs);
+            
         }
         catch (error) {
             console.log(error);
@@ -128,7 +111,7 @@ router.put('/DeletePatient',
             if (conn) {
                 conn.end;
             }
-            // Ultra important pour éviter les injections SQL
+            
         }
     });
 

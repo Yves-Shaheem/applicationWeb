@@ -14,7 +14,6 @@ function PatientCrud() {
     const deletePatient = "http://localhost:5000/DeletePatient";
 
     const deletePatientData=(id)=>{
-        console.log(id);
         axios.put(deletePatient,{
             index:id,
             status:false

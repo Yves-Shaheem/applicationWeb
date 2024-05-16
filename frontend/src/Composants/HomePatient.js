@@ -55,11 +55,11 @@ const postData=(id)=>{
         <div className="container">
             <div className="row">
             <div className="text-center"><h1>Page HomePatient</h1></div>
-            <div className="col-6 p-2 ">
+            <div className="col-7">
                 <div>
+                <h3>Liste des reservations</h3>
                 <table className="table table-striped border border-dark-subtle p-3 rounded bg-body-tertiary">
                     <thead>
-                    <h3>Liste des reservations</h3>
                     <tr>
                         <th>Id</th>
                         <th>PatientEmail</th>
@@ -94,10 +94,10 @@ const postData=(id)=>{
                 </div>
             </div>
 
-            <div className="col-6 p-2 ">
+            <div className="col-5 ">
+            <h3>Réception des résultats</h3>
                 <table className="table border border-dark-subtle p-3 rounded bg-body-tertiary">
                     <thead>
-                    <h3>Réception des résultats</h3>
                     <tr>
                         <th>Résultats</th>
                     </tr>

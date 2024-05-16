@@ -44,16 +44,6 @@ status boolean,
 PRIMARY KEY(admin_id)
 );
 
-# DROP TABLE if EXISTS credentials;
-# CREATE TABLE credentials(
-# user_id INT NOT NULL,
-# pass VARCHAR(30) NOT NULL,
-# email VARCHAR(30) NOT NULL,
-# PRIMARY KEY(user_id, email),
-# FOREIGN KEY(user_id) REFERENCES patient(user_id),
-# FOREIGN KEY(user_id) REFERENCES docteur( user_id),
-# FOREIGN KEY(user_id) REFERENCES administrator(admin_id)
-# );
 
 DROP TABLE if EXISTS reservation;
 CREATE TABLE reservation(

@@ -43,7 +43,7 @@ function InscriptionPatient(){
             email:"",
             success:"Votre compte a été créer"
         };
-        console.log(inputValues);
+        
         if(!inputValues.lastname[0] || !inputValues.firstname[0]
             || !inputValues.email[0] || !inputValues.ramq[0] || !inputValues.password[0]) {
             errors.value = "Aucun champ ne doit etre vide ! ";

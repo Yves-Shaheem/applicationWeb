@@ -51,7 +51,7 @@ function RendezVous(){
           raison:"",
           success:"Votre réservation a été créer"
       };
-      console.log(inputValues);
+      
       if(!inputValues.ramq[0] || !inputValues.email[0]
           || !inputValues.telephone[0] || !inputValues.temps[0] || !inputValues.raison[0]) {
           errors.value = "Aucun champ ne doit etre vide ! ";
@@ -82,7 +82,6 @@ function RendezVous(){
           raison:reservation.raison[0],
           idDoctor:valueDoct
       }
-      console.log("userData:",userData);
       if(formErrors.ramq === "" && formErrors.email === "" && formErrors.value === ""){
           axios.post(baseURL, userData,{
               headers: {
@@ -100,7 +99,7 @@ function RendezVous(){
 
   function handleChange2(event) {
       setValueDoct(event.target.value);
-      console.log("ID doct:",event.target.value);
+      
   }
   
   

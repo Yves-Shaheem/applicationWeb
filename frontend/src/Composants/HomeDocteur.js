@@ -52,7 +52,6 @@ function HomeDocteur (){
             message:"",
             success: "Votre resultat a été créer"
         };
-        console.log(inputValues);
         if(!inputValues.ramq[0] || !inputValues.patientEmail[0] || !inputValues.doctorEmail[0] || !inputValues.message[0]) {
             errors.value = "Aucun champ ne doit etre vide ! ";}
 
@@ -142,10 +141,12 @@ const postData=(id)=>{
                 <div className="text-center m-2">
                     <h1>Page HomeDocteur</h1>
                 </div>
-                <div className="col-6 border border-dark-subtle bg-body-tertiary p-3 ">
+                
+                <div className="col-7 border border-dark-subtle bg-body-tertiary p-3 ">
+                <h3>Liste des reservations</h3>
                 <table className="table table-striped">
                     <thead>
-                    <h3>Liste des reservations</h3>
+                    
                     <tr>
                     <th>Id</th>
                     <th>PatientEmail</th>
@@ -153,6 +154,7 @@ const postData=(id)=>{
                     <th>DoctorEmail</th>
                     <th>temps</th>
                     <th>raison</th>
+                    <th>Buttons</th>
  
                     </tr>
                     </thead>
@@ -204,10 +206,10 @@ const postData=(id)=>{
                     }
                     </tbody>
                 </table>
- 
+                
             </div>
-
-            <div className="col-6 border border-dark-subtle bg-body-tertiary p-3">
+          
+            <div className="col-5 border border-dark-subtle bg-body-tertiary p-3">
            <div className="text-center">
             <h3>Soumissions des résultats</h3>
             </div>
@@ -254,8 +256,8 @@ const postData=(id)=>{
             </div>
 
             </div>
-            
-        </div>
+            </div>
+        
         
     );
 }
