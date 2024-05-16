@@ -1,3 +1,10 @@
+    /*
+    * @author Yanni
+    *
+    * */
+
+
+
 function TermsOfUse() {
     return (
         <div className="hero">

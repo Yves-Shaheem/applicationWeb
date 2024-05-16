@@ -1,31 +1,29 @@
 import express from "express";
 import mariadb from "mariadb";
 import cors from "cors";
+import database from "./properties.js";
+
+
 
 const app = express();
 const router =express.Router();
 app.use(cors());
 
-const db = mariadb.createPool({
-    host: "127.0.0.1",
-    port: "3306",
-    user: "root",
-    password: "",
-    database: "projet"
-});
+const db = database;
 
+/*
+    * @author Shaheem et Jimmy Nguyen
+    *
+    * */
+ 
 
 router.get('/resultat',
     async (request, response) => {
         let conn;
         try {
             conn = await db.getConnection();
-            if(conn){
-                console.log("Connected to DB");
-            }
             const query = "Select * from resultat where status=1";
             const rs = await conn.query(query);
-            console.log(rs);
             return response.json(rs);
         }
         catch (error) {
@@ -34,7 +32,7 @@ router.get('/resultat',
             if (conn) {
                 conn.end;
             }
-            // Ultra important pour éviter les injections SQL
+            
         }
     });
 
@@ -49,13 +47,9 @@ router.post('/CreateResult',
         const values = [rq,pe,de,mess,st];
         try {
             conn = await db.getConnection();
-            if(conn){
-                console.log("Connected to DB");
-            }
             const query = "Insert into resultat( ramq, patientEmail, doctorEmail, message, status) values(?,?,?,?,?)";
             const rs = await conn.prepare(query);
             await rs.execute(values);
-            console.log(rs);
             return response.json(rs);
         }
         catch (error) {
@@ -77,15 +71,11 @@ router.put('/UpdateResultat',
         const values = [status,index];
         try {
             conn = await db.getConnection();
-            if(conn){
-                console.log("Connected to DB");
-            }
             const reservation = "Update resultat Set status= ? where reservation_id= ?";
             const rs = await conn.prepare(reservation);
             await rs.execute(values);
-            console.log(rs);
             response.send("OK");
-            //return response.json(rs);
+            
         }
         catch (error) {
             console.log(error);
@@ -93,7 +83,7 @@ router.put('/UpdateResultat',
             if (conn) {
                 conn.end;
             }
-            // Ultra important pour éviter les injections SQL
+           
         }
     });
 

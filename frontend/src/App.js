@@ -1,7 +1,5 @@
-import './App.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import NavBar from './Navbar';
-import  Home from './Composants/Home'
 import About from './Composants/About'
 import Footer2 from './Composants/Footer2';
 import Services from './Composants/Services'
@@ -20,13 +18,16 @@ import RechercherDocteur from './Composants/RechercherDocteur';
 import InscriptionDocteur from './Composants/InscriptionDocteur';
 
 function App() {
+  /*
+    * @author Shaheem,Yanni et Jimmy
+    *
+    * */
   return (
     <>
    <BrowserRouter>
       <NavBar />
-      <div>
+      <>
         <Routes>
-          <Route path='/' element={<Home/>} />
           <Route path='/About' element={<About/>} />
           <Route path='/Services' element={<Services />} />
           <Route path='/Contact' element={<Contact/>}/>
@@ -35,7 +36,7 @@ function App() {
           <Route path="/SeConnecter" element={<SeConnecter/>} />
           <Route path="/RendezVous" element={<RendezVous/>} />
           <Route path="/TermsOfUse" element={<TermsOfUse/>} />
-          <Route path='/HomePatient' element={<HomePatient/>} />
+          <Route path='/' element={<HomePatient/>} />
           <Route path='/Admin' element={<AdminPanel/>} />
           <Route path='/Faq' element={<Faq/>} />
           <Route path='/HomeDocteur' element={<HomeDocteur/>}/>
@@ -44,7 +45,7 @@ function App() {
           <Route path='/InscriptionDocteur' element={<InscriptionDocteur/>} />
 
         </Routes>
-      </div>
+      </>
     </BrowserRouter>
     <Footer2 />    
     </>

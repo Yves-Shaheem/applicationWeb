@@ -4,6 +4,11 @@ import axios from "axios";
 
 
 function InscriptionDocteur(){
+    /*
+    * @author Yanni et Jimmy
+    *
+    * */
+ 
 
     const baseURL = "http://localhost:5000/CreateDocteur";
     const [checked, setChecked] = React.useState(true);
@@ -43,7 +48,7 @@ function InscriptionDocteur(){
             email:"",
             success:"Votre compte a été créer"
         };
-        console.log(inputValues);
+       
         if(!inputValues.lastname[0] || !inputValues.firstname[0]
         || !inputValues.email[0] || !inputValues.licence[0] || !inputValues.specialite[0]|| !inputValues.password[0]) {
             errors.value = "Aucun champ ne doit être vide !";

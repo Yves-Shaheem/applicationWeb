@@ -5,6 +5,11 @@ import Popup from "reactjs-popup";
 
 function RechercherDocteur() {
 
+    /*
+    * @author Yanni
+    *
+    * */
+ 
 
     // Données docteurs
     const getDocteur = "http://localhost:5000/docteur";
@@ -26,8 +31,8 @@ function RechercherDocteur() {
 
     // Source donné à la fin du code
     return (
-        <div className="hero">
-            <div className="col-12">
+        <div className="container text-center p-2">
+            <div className="justify-content-center border border-dark-subtle p-3 rounded bg-body-tertiary">
                 <h1>Chercher un docteur</h1>
                 <div className="rechercheBar">
                     <input
@@ -36,6 +41,7 @@ function RechercherDocteur() {
                         onChange={handleChange}
                         name="recherche"
                         placeholder=""
+                        className="form-label"
                     />
                     <button onClick={() => console.log(value)}>
                         <i class="fa-solid fa-magnifying-glass"></i>

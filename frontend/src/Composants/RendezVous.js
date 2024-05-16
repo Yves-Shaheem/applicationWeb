@@ -3,6 +3,11 @@ import axios from "axios";
 import { useEffect } from "react";
 
 function RendezVous(){
+    /*
+    * @author Jimmy Nguyen et Yanni
+    *
+    * */
+ 
 
   const baseURL = "http://localhost:5000/CreateReservation";
   const getDocteur = "http://localhost:5000/docteur";
@@ -46,7 +51,7 @@ function RendezVous(){
           raison:"",
           success:"Votre réservation a été créer"
       };
-      console.log(inputValues);
+      
       if(!inputValues.ramq[0] || !inputValues.email[0]
           || !inputValues.telephone[0] || !inputValues.temps[0] || !inputValues.raison[0]) {
           errors.value = "Aucun champ ne doit etre vide ! ";
@@ -77,7 +82,6 @@ function RendezVous(){
           raison:reservation.raison[0],
           idDoctor:valueDoct
       }
-      console.log("userData:",userData);
       if(formErrors.ramq === "" && formErrors.email === "" && formErrors.value === ""){
           axios.post(baseURL, userData,{
               headers: {
@@ -95,7 +99,7 @@ function RendezVous(){
 
   function handleChange2(event) {
       setValueDoct(event.target.value);
-      console.log("ID doct:",event.target.value);
+      
   }
   
   
@@ -106,64 +110,70 @@ function RendezVous(){
 }, [])
 
     return(
-        <div className="hero">
-            <div className="col-12">
-                <h1>Prendre rendez-vous</h1>
-                <form  onSubmit={handleSubmit}>
-                <div>
-            ramq: <br />
-            <input onChange={handleChange} type="text" name="ramq" maxLength={12} />
-          </div>
-
-          <div>
-            Email: <br />
-            <input onChange={handleChange} type="text" name="email" />
-          </div>
-
-          <div>
-            Numéro de téléphone: <br />
-            <input onChange={handleChange} type="text" name="telephone"/>
-          </div>
-          
-          <div>
-            Date : <br />
-            <input onChange={handleChange} type="date" name="temps" />
-          </div>
+        <div className="d-flex justify-content-center p-2 bg-light-subtle">
 
 
-          <div>
-            Raison du rendez-vous: <br />
-            <input onChange={handleChange} type="text" name="raison" />
-          </div>
+            <form onSubmit={handleSubmit}
+                  className="justify-content-center border border-dark-subtle p-3 rounded bg-body-tertiary">
 
-            <div>
-                Docteur: <br />
-                <select onChange={handleChange2} name="selectionDocteurs">
-                <option value="NoChoice">Selectionner un docteur</option>    
-               {docteur.map((user)=>(
-                    <option key={user.user_id} value={user.user_id}>{user.firstname} {user.lastname}</option>
+                <h1 className="text-center"> Prendre rendez-vous </h1>
 
-               ))}    
+                <div className="mt-3 ">
+                    <label className="col-sm-2 col-form-label">RAMQ:</label>
 
-                </select> 
-            </div>
+                    <input onChange={handleChange} type="text" name="ramq" maxLength={12} className="form-control"
+                           placeholder="EX: CVCV21323419"/>
+                </div>
 
-          <br></br>
-          <p> <span className="text-danger">
+                <div className="mt-3">
+                    <label className="form-label">Email:</label>
+                    <input onChange={handleChange} type="email" name="email" className="form-control "
+                           placeholder="noname@noname.co"/>
+                </div>
+
+                <div className="mt-3">
+                    <label className="form-label">Téléphone:</label>
+                    <input onChange={handleChange} type="" name="telephone" className="form-control "/>
+                </div>
+
+                <div className="mt-3">
+                    <label className="form-label">Date:</label>
+                    <input onChange={handleChange} type="date" name="temps" className="form-control "/>
+                </div>
+
+
+                <div className="mt-3">
+                    <label className="form-label">Raison:</label>
+                    <input onChange={handleChange} type="text" name="raison" className="form-control "/>
+                </div>
+
+                <div className="mt-3">
+                    <label className="form-label">Docteur: </label>
+                    <select onChange={handleChange2} name="selectionDocteurs" className="form-control ">
+                        <option value="NoChoice"> Sélectionner un docteur</option>
+                        {docteur.map((user) => (
+                            <option key={user.user_id}
+                                    value={user.user_id}>{user.firstname} {user.lastname}</option>
+
+                        ))}
+
+                    </select>
+                </div>
+                <div className="text-center mt-3">
+                <button onClick={handleSubmit} type="button" className="btn btn-danger mt-3 justify-item-center">Réserver</button>
+                </div>
+                    <div className="mt-3"> <span className="text-danger">
                         {formErrors.value}<br/>
-                        {formErrors.ramq}<br/>
-                        {formErrors.email}<br/>
+                    {formErrors.ramq}<br/>
+                    {formErrors.email}<br/>
                                         </span>
-                        <span className="text-success">{formErrors.success}</span><br/>
-                    </p>
-          <button onClick={handleSubmit} type="button" className="btn btn-danger">Réserver</button>
+                    <span className="text-success">{formErrors.success}</span><br/>
+                </div>
             </form>
-            </div>
 
 
         </div>
-        
-
     )
 }
+
 export default RendezVous;
